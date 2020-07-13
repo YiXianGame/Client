@@ -50,7 +50,7 @@ namespace Native.App.Export
 		[DllExport (ExportName = "AppInfo", CallingConvention = CallingConvention.StdCall)]	
 		private static string AppInfo ()	
 		{	
-			return "9,Native.Core";	
+			return "9,xianyu.xianzhan.client";	
 		}	
 		
 		/// <summary>	
@@ -64,12 +64,12 @@ namespace Native.App.Export
 			// 反射获取 AppData 实例	
 			Type appDataType = typeof (AppData);	
 			// 注册一个 CQApi 实例	
-			AppInfo appInfo = new AppInfo ("Native.Core", 1, 9, "酷Q样例应用 for C#", "1.0.0", 1, "JieGG", "酷Q样例应用(V9应用机制)", authCode);	
+			AppInfo appInfo = new AppInfo ("xianyu.xianzhan.client", 1, 9, "仙域大陆-太初", "1.0.0", 1, "剑仙", "仙域-仙战为前身.", authCode);	
 			appDataType.GetRuntimeProperty ("CQApi").GetSetMethod (true).Invoke (null, new object[] { new CQApi (appInfo) });	
-			AppData.UnityContainer.RegisterInstance<CQApi> ("Native.Core", AppData.CQApi);	
+			AppData.UnityContainer.RegisterInstance<CQApi> ("xianyu.xianzhan.client", AppData.CQApi);	
 			// 向容器注册一个 CQLog 实例	
 			appDataType.GetRuntimeProperty ("CQLog").GetSetMethod (true).Invoke (null, new object[] { new CQLog (authCode) });	
-			AppData.UnityContainer.RegisterInstance<CQLog> ("Native.Core", AppData.CQLog);	
+			AppData.UnityContainer.RegisterInstance<CQLog> ("xianyu.xianzhan.client", AppData.CQLog);	
 			// 注册插件全局异常捕获回调, 用于捕获未处理的异常, 回弹给 酷Q 做处理	
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;	
 			// 本函数【禁止】处理其他任何代码，以免发生异常情况。如需执行初始化代码请在Startup事件中执行（Type=1001）。	

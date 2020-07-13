@@ -5,11 +5,11 @@
 {
 	"ret": 1,
 	"apiver": 9,
-	"name": "酷Q样例应用 for C#",
+	"name": "仙域大陆-太初",
 	"version": "1.0.0",
 	"version_id": 1,
-	"author": "JieGG",
-	"description": "酷Q样例应用(V9应用机制)",
+	"author": "剑仙",
+	"description": "仙域-仙战为前身.",
 	"event": [
 		{
 			"id": 1,
