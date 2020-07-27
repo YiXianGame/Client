@@ -17,29 +17,44 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Collections;
+using MaterialDesignThemes;
+using MaterialDesignColors;
+using Pack.BLL;
 
 namespace Pack.Element
 {
     /// <summary>
     /// CardPanle.xaml 的交互逻辑
     /// </summary>
-    public partial class CardPanle
+    public partial class CardPanle:UserControl
     {
         public int NowFirst = 0;
         SkillCard Filter_Skill = new SkillCard();
         public CardPanle()
         {
             InitializeComponent();
+            Filter_Skill.State = -1;
             Filter_Bar.DataContext = Filter_Skill;
         }
+
         public Custom_Card_SkillCard Add_Card(SkillCardsModel skillCards)
         {
             Custom_Card_SkillCard card = new Custom_Card_SkillCard(skillCards);
             CardsPanel.Children.Add(card);
             if (Make.MODEL.GeneralControl.LazyLoad_SkillCards) if (CardsPanel.Children.Count >= 96) card.Visibility = Visibility.Collapsed;
             card.EditButton.Click += EditButton_Click;
+            card.AuthorButton.Click += AuthorButton_Click;
             return card;
         }
+
+        private void AuthorButton_Click(object sender, RoutedEventArgs e)
+        {
+            DependencyObject ptr = sender as DependencyObject;
+            while (!(ptr is Custom_Card_SkillCard)) ptr = VisualTreeHelper.GetParent(ptr);
+            XY.Send_To_Server("作者信息&" + (ptr as Custom_Card_SkillCard).SkillCardsModel.Author_ID);
+            Author.Visibility = Visibility.Visible;
+        }
+
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             DependencyObject ptr = sender as DependencyObject;

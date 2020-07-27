@@ -23,7 +23,7 @@ namespace Pack.Element
     /// <summary>
     /// CardPanle.xaml 的交互逻辑
     /// </summary>
-    public partial class AdventurePanle
+    public partial class AdventurePanle : UserControl
     {
         public int NowFirst = 0;
         Adventure Filter_Adventure = new Adventure();

@@ -10,16 +10,19 @@ using System.Windows.Forms;
 
 namespace Make.MODEL
 {
+    /// <summary>
+    /// 奇遇
+    /// </summary>
     public class Adventure
     {
-        private string name = "";
-        private int mp;
-        private int hp;
-        private int state=-1;//技能卡状态
-        private List<State> effect_States=new  List<State>();
-        private string messages="";
-        private int probability;
-        private string description="";
+        private string name = "";//奇遇名
+        private int mp;//对这个玩家造成的MP
+        private int hp;//对这个玩家造成的HP
+        private int state=-1;//奇遇状态（是否可用）
+        private List<State> effect_States=new  List<State>();//奇遇所自带的状态效果
+        private string messages="";//自带信息
+        private int probability;//概率
+        private string description="";//奇遇的描述（介绍）
 
         public string Name
         { 
@@ -51,7 +54,6 @@ namespace Make.MODEL
 
             
         }
-
         public void Save()
         {
             string json = JsonConvert.SerializeObject(this);
