@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Pack.BLL;
 using Unity;
 using Pack;
+using System.Windows;
 
 namespace Native.Core
 {
@@ -21,11 +22,10 @@ namespace Native.Core
 		/// <param name="container">用于注册的 IOC 容器 </param>
 		public static void Register (IUnityContainer unityContainer)
 		{
-			Pack.BLL.Init.GetCqData(Domain.AppData.CQApi, Domain.AppData.CQLog);
 			unityContainer.RegisterType<IGroupMessage, Event_GroupMessage>("群消息处理");
 			unityContainer.RegisterType<IPrivateMessage, Event_PrivateMessage>("私聊消息处理");
 			unityContainer.RegisterType<IAppEnable, Event_Enable>("应用已被启用");
-			unityContainer.RegisterType<IMenuCall, MainWindow>("仙域菜单");
+			unityContainer.RegisterType<IMenuCall, Menu_OpenWindow>("仙域菜单");
 		}
 	}
 }

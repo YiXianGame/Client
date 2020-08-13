@@ -1,4 +1,5 @@
-﻿using Native.Sdk.Cqp.EventArgs;
+﻿using Make.MODEL;
+using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Pack.BLL
     {
         public void AppEnable(object sender, CQAppEnableEventArgs e)
         {
+            GeneralControl.CQApi = e.CQApi;
+            GeneralControl.CQLog = e.CQLog;
             Init init = new Init();
         }
     }

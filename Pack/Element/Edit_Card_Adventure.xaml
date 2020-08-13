@@ -94,7 +94,7 @@
             <local:Custom_Card_Adventure x:Name="Custom_Card_Adventure" Margin="5" HorizontalAlignment="Center" Width="312" Height="225" VerticalAlignment="Center"/>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="194,24,194,151" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontFamily="楷体" FontWeight="Bold" FontSize="30"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="194,24,194,151" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Name}" FontFamily="楷体" FontWeight="Bold" FontSize="30"/>
             <TextBox
     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
     VerticalAlignment="Top"
@@ -105,6 +105,9 @@
     materialDesign:HintAssist.Hint="技能说明"
     Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
     Margin="112,110,112,0" />
+            <Button Margin="465,55,138,160" Width="30" Height="30">
+                <materialDesign:PackIcon Kind="Check" Foreground="GreenYellow"  Width="30" Height="30" Margin="-17,-10,-15,-10"/>
+            </Button>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid Margin="124,66,124,170" x:Name="G1" VerticalAlignment="Center" Height="149">
@@ -130,10 +133,13 @@
             </Grid>
             <Button
     Style="{StaticResource MaterialDesignOutlinedButton}"
-    ToolTip="MaterialDesignOutlinedButton" Height="Auto" Margin="402,304,116,36" FontSize="18" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_2" Content="关闭"/>
+    ToolTip="MaterialDesignOutlinedButton" Height="Auto" Margin="442,305,76,35" FontSize="18" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_2" Content="关闭"/>
             <Button
                 Style="{StaticResource MaterialDesignOutlinedButton}"
-                ToolTip="MaterialDesignOutlinedButton" Height="Auto" Margin="120,304,398,36" FontSize="18" Content="删除" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_3"/>
+                ToolTip="MaterialDesignOutlinedButton" Height="Auto" Margin="270,305,248,35" FontSize="18" Content="删除" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_3"/>
+            <Button
+                Style="{StaticResource MaterialDesignOutlinedButton}"
+                ToolTip="MaterialDesignOutlinedButton" Height="Auto" Margin="90,305,428,35" FontSize="18" Content="上传云端" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_5"/>
         </Grid>
         <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="18,243,17,0" Grid.RowSpan="2" Width="300" Height="302">
             <ScrollViewer  ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">

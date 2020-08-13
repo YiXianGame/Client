@@ -45,9 +45,13 @@ namespace Make.MODEL
             get => name;
             set
             {
-                if (GeneralControl.Skill_Card_Dictionary.ContainsKey(name))
+                if (GeneralControl.Skill_Card_Dictionary.ContainsKey(name) && GeneralControl.Skill_Card_Dictionary.ContainsValue(this))
                 {
-                    if (GeneralControl.Skill_Card_Dictionary.ContainsKey(value)) return;
+                    if (GeneralControl.Skill_Card_Dictionary.ContainsKey(value))
+                    {
+                        Name = value + "-副本";
+                        return;
+                    }
                     else
                     {
                         GeneralControl.Skill_Card_Dictionary.Remove(name);

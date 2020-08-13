@@ -1,4 +1,6 @@
 ﻿using Make.MODEL;
+using Newtonsoft.Json;
+using Pack.BLL;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -18,6 +20,7 @@ namespace Pack.Element
         public Edit_Card_SkillCard()
         {
             InitializeComponent();
+            Custom_Card.State.IsEnabled = true;
         }
 
         public void Open_Edit(Custom_Card_SkillCard custom_Card)
@@ -44,6 +47,7 @@ namespace Pack.Element
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Hidden;
+            Custom_Card.State.IsEnabled = false;
             Origin_Custom_Card.SkillCardsModel.Save();
         }
 
@@ -90,6 +94,7 @@ namespace Pack.Element
             if (Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Effect_States.Count >= Make.MODEL.GeneralControl.MaxStates)
             {
                 MessageBox.Show("状态数量已满");
+                States_Select.Visibility = Visibility.Hidden;
                 return;
             }
             State state = new State
@@ -112,6 +117,11 @@ namespace Pack.Element
             Origin_Custom_Card.DataContext = skillCard;
             Origin_Custom_Card.DataContext = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1];
             States_Select.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            XY.Send_To_Server("技能卡上传#" + JsonConvert.SerializeObject(Origin_Custom_Card.SkillCardsModel));
         }
     }
 }

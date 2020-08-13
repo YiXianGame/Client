@@ -122,17 +122,10 @@ namespace Pack.Element
             string temp;
             foreach (SkillCard item in skillCards)
             {
-                temp = "新技能" + (++cnt).ToString();
-                if (GeneralControl.Skill_Card_Dictionary.ContainsKey(temp))
-                {
-                    MessageBox.Show("发现重复技能名");
-                    return;
-                }
-                item.Name = temp;
-                GeneralControl.Skill_Card_Dictionary.Add(item.Name,item);
+                item.Name = "新技能" + (++cnt).ToString();
             }
             SkillCardsModel skillCardsModel = new SkillCardsModel(skillCards);
-            GeneralControl.Skill_Cards.Add(skillCardsModel);
+            skillCardsModel.Add_To_General();
             skillCardsModel.Save();
             Add_Card(skillCardsModel);
         }
@@ -140,6 +133,11 @@ namespace Pack.Element
         private void Template_Skill_Name_TextChanged(object sender, TextChangedEventArgs e)
         {
             Fitler();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            XY.Send_To_Server("获取技能卡");
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using Make.MODEL;
 using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
+using Newtonsoft.Json;
 using Pack.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,20 +24,21 @@ namespace Pack
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window, IMenuCall
+    public partial class MainWindow : Window
     {
         public Make.MODEL.Author author;
 
         public MainWindow()
         {
+            GeneralControl.MainMenu = this;           
             InitializeComponent();
             Init();
+            BLL.Init init = new Init();
         }
 
         private void Init()
         {
             UI_Init();
-            //XY.Send_To_Server("用户#" + GeneralControl.Menu_Person_Informations_Class.Instance.Author.ID);
             Menu_Adventure_Cards.DataContext = GeneralControl.Menu_Adventure_Cards_Class.Instance;
             Menu_Lience.DataContext = GeneralControl.Menu_Lience_Class.Instance;
             Menu_Person_Informations.DataContext = GeneralControl.Menu_Person_Informations_Class.Instance;
@@ -43,22 +46,7 @@ namespace Pack
             Menu_Skill_Cards.DataContext = GeneralControl.Menu_Skill_Cards_Class.Instance;
             CardPanle.Author.DataContext = author;
         }
-        public void MenuCall(object sender, CQMenuCallEventArgs e)
-        {
-            if (this.Visibility == Visibility.Visible)
-            {
-                Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                Visibility = Visibility.Visible;	// 将窗体调制到前台激活
-            }
-        }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Close();
-        }
         private void SkillCardsPanle_Initialized(object sender, EventArgs e)
         {
 
@@ -115,6 +103,16 @@ namespace Pack
         private void Menu_Button_1_Copy1_Click(object sender, RoutedEventArgs e)
         {
             Main_TabControl.SelectedIndex = 2;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            XY.Send_To_Server("保存用户#" + JsonConvert.SerializeObject(GeneralControl.Menu_Person_Informations_Class.Instance.Author));
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            XY.Send_To_Server("用户#" + 3028394801);
         }
     }
 }

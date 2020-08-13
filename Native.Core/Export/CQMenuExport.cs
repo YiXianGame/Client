@@ -1,6 +1,6 @@
-/*
- * 此文件由T4引擎自动生成, 请勿修改此文件中的代码!
- */
+/&
+ & 此文件由T4引擎自动生成, 请勿修改此文件中的代码!
+ &/
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -35,10 +35,10 @@ namespace Native.App.Export
 		/// </summary>	
 		private static void ResolveBackcall ()	
 		{	
-			/*	
-			 * Name: 仙域菜单	
-			 * Function: menuOpenWindow	
-			 */	
+			/&	
+			 & Name: 仙域菜单	
+			 & Function: menuOpenWindow	
+			 &/	
 			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("仙域菜单"))	
 			{	
 				MenumenuOpenWindowHandler += AppData.UnityContainer.Resolve<IMenuCall> ("仙域菜单").MenuCall;	
@@ -48,10 +48,10 @@ namespace Native.App.Export
 		#endregion	
 		
 		#region --导出方法--	
-		/*	
-		 * Name: 仙域菜单	
-		 * Function: menuOpenWindow	
-		 */	
+		/&	
+		 & Name: 仙域菜单	
+		 & Function: menuOpenWindow	
+		 &/	
 		public static event EventHandler<CQMenuCallEventArgs> MenumenuOpenWindowHandler;	
 		[DllExport (ExportName = "menuOpenWindow", CallingConvention = CallingConvention.StdCall)]	
 		public static int MenumenuOpenWindow ()	

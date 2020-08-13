@@ -44,7 +44,7 @@
             <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.ThumbIndicatorCheckedBrush.Win10" Color="{DynamicResource Primary500Foreground}" />
         </ResourceDictionary>
     </Window.Resources>
-        <Grid x:Name="MainGrid" ScrollViewer.VerticalScrollBarVisibility="Disabled" RenderTransformOrigin="0.5,0.5">
+    <Grid x:Name="MainGrid" ScrollViewer.VerticalScrollBarVisibility="Disabled" RenderTransformOrigin="0.5,0.5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="5*"/>
@@ -52,22 +52,24 @@
         </Grid.ColumnDefinitions>
         <TabControl x:Name="Main_TabControl" Margin="0,-25,0,0" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" SelectedIndex="0"  Padding="0">
             <TabItem x:Name="Menu_Person_Informations" Header="个人信息">
-                <Grid DataContext="{Binding Author}" >
+                <Grid DataContext="{Binding Path=Author, UpdateSourceTrigger=PropertyChanged}">
                     <Border BorderThickness="0.1" Margin="10" Background="White" CornerRadius="30" >
                         <Border.Effect>
                             <DropShadowEffect Color="Blue" BlurRadius="10" ShadowDepth="0" Opacity="1" />
                         </Border.Effect>
                     </Border>
-                    <TextBox Style="{StaticResource  MaterialDesignDataGridComboBoxEditableTextBox}" Height="114" Margin="470,42,465,570" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="385" FontFamily="楷体" FontSize="100" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBox Style="{StaticResource  MaterialDesignDataGridComboBoxEditableTextBox}" Height="114" Margin="300,42,285,569"  Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="735" FontFamily="楷体" FontSize="100" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center" RenderTransformOrigin="0.497,0.474"/>
                     <TextBox Style="{StaticResource MaterialDesignComboBoxEditableTextBox}" Height="216" Margin="24,471,25,39" Text="{Binding Path=Informations}"  VerticalAlignment="Center" FontFamily="楷体" FontSize="50" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"/>
                     <Label Content="已创作的卡牌数量:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="65,297,1040,364"/>
-                    <Label Content="{Binding Create_num}"  VerticalContentAlignment="Center" FontSize="30" Margin="290,297,950,364" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
+                    <Label Content="{Binding Path=Create_num}"  VerticalContentAlignment="Center" FontSize="30" Margin="290,297,950,364" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
                     <Label Content="张" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="375,297,895,364"/>
                     <Label Content="已更新的卡牌数量:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="65,382,1040,279"/>
-                    <Label Content="{Binding Upgrade_num}"  VerticalContentAlignment="Center" FontSize="30" Margin="290,382,950,279" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
+                    <Label Content="{Binding Path=Upgrade_num}"  VerticalContentAlignment="Center" FontSize="30" Margin="290,382,950,279" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
                     <Label Content="张" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="375,382,895,279"/>
                     <Label Content="QQ号:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Margin="65,202,1155,454"/>
-                    <TextBox Text="{Binding QQ}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Margin="175,202,895,454"/>
+                    <TextBox Text="{Binding Path=QQ}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Margin="175,202,895,454"/>
+                    <Button Content="刷" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Background="LightSeaGreen" HorizontalAlignment="Left" Height="75" Margin="1075,26,0,0" VerticalAlignment="Top" Width="75" FontSize="36" Click="Button_Click_1"/>
+                    <Button Content="存" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Background="LightSeaGreen" HorizontalAlignment="Left" Height="75" Margin="1185,26,0,0" VerticalAlignment="Top" Width="75" FontSize="36" Click="Button_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="Menu_Skill_Cards" Header="技能设置">

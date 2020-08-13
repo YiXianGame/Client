@@ -12,35 +12,35 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                    <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
-                    <!-- Material Design -->
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Teal.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                </ResourceDictionary.MergedDictionaries>
-                <local:Converts x:Key="Bool_To_Vis"/>
-                <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}"/>
-                <SolidColorBrush x:Key="AccentBaseColorBrush" Color="{DynamicResource Primary600}" />
-                <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource Primary500}"/>
-                <SolidColorBrush x:Key="AccentColorBrush2" Color="{DynamicResource Primary400}"/>
-                <SolidColorBrush x:Key="AccentColorBrush3" Color="{DynamicResource Primary300}"/>
-                <SolidColorBrush x:Key="AccentColorBrush4" Color="{DynamicResource Primary200}"/>
-                <SolidColorBrush x:Key="WindowTitleColorBrush" Color="{DynamicResource Primary700}"/>
-                <SolidColorBrush x:Key="AccentSelectedColorBrush" Color="{DynamicResource Primary500Foreground}"/>
-                <LinearGradientBrush x:Key="ProgressBrush" EndPoint="0.001,0.5" StartPoint="1.002,0.5">
-                    <GradientStop Color="{DynamicResource Primary700}" Offset="0"/>
-                    <GradientStop Color="{DynamicResource Primary300}" Offset="1"/>
-                </LinearGradientBrush>
-                <SolidColorBrush x:Key="CheckmarkFill" Color="{DynamicResource Primary500}"/>
-                <SolidColorBrush x:Key="RightArrowFill" Color="{DynamicResource Primary500}"/>
-                <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{DynamicResource Primary500Foreground}"/>
-                <SolidColorBrush x:Key="IdealForegroundDisabledBrush" Color="{DynamicResource Primary500}" Opacity="0.4"/>
-                <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.OnSwitchBrush.Win10" Color="{DynamicResource Primary500}" />
-                <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.OnSwitchMouseOverBrush.Win10" Color="{DynamicResource Primary400}" />
-                <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.ThumbIndicatorCheckedBrush.Win10" Color="{DynamicResource Primary500Foreground}" />
-            </ResourceDictionary>
-        </UserControl.Resources>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <!-- Material Design -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Teal.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:Converts x:Key="Bool_To_Vis"/>
+            <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}"/>
+            <SolidColorBrush x:Key="AccentBaseColorBrush" Color="{DynamicResource Primary600}" />
+            <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource Primary500}"/>
+            <SolidColorBrush x:Key="AccentColorBrush2" Color="{DynamicResource Primary400}"/>
+            <SolidColorBrush x:Key="AccentColorBrush3" Color="{DynamicResource Primary300}"/>
+            <SolidColorBrush x:Key="AccentColorBrush4" Color="{DynamicResource Primary200}"/>
+            <SolidColorBrush x:Key="WindowTitleColorBrush" Color="{DynamicResource Primary700}"/>
+            <SolidColorBrush x:Key="AccentSelectedColorBrush" Color="{DynamicResource Primary500Foreground}"/>
+            <LinearGradientBrush x:Key="ProgressBrush" EndPoint="0.001,0.5" StartPoint="1.002,0.5">
+                <GradientStop Color="{DynamicResource Primary700}" Offset="0"/>
+                <GradientStop Color="{DynamicResource Primary300}" Offset="1"/>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="CheckmarkFill" Color="{DynamicResource Primary500}"/>
+            <SolidColorBrush x:Key="RightArrowFill" Color="{DynamicResource Primary500}"/>
+            <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{DynamicResource Primary500Foreground}"/>
+            <SolidColorBrush x:Key="IdealForegroundDisabledBrush" Color="{DynamicResource Primary500}" Opacity="0.4"/>
+            <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.OnSwitchBrush.Win10" Color="{DynamicResource Primary500}" />
+            <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.OnSwitchMouseOverBrush.Win10" Color="{DynamicResource Primary400}" />
+            <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.ThumbIndicatorCheckedBrush.Win10" Color="{DynamicResource Primary500Foreground}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <materialDesign:Card  Width="auto" Margin="0"  x:Name="Card" Height="225" VerticalAlignment="Top">
         <Grid VerticalAlignment="Center">
             <Grid.RowDefinitions>
@@ -119,15 +119,16 @@
                                         </TextBlock>
                                     </ListBoxItem.Content>
                                 </ListBoxItem>
-                                
+
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 
                     </ListBox>
+                    <Label Content="{Binding Path=Cloud}" HorizontalAlignment="Left" Height="26" Margin="244,194,-69,-85" VerticalAlignment="Top" Width="65"  FontSize="11" FontWeight="Bold"  Foreground="#DD00AEFF"/>
                 </Grid>
             </Grid>
             <Border Grid.Column="0" Grid.Row="1"  BorderThickness="0 2 0 2"  Margin="0">
-                <ListBox Style="{StaticResource MaterialDesignToolToggleListBox}" materialDesign:ListBoxAssist.IsToggle="False" Height="37" SelectedIndex="{Binding State, Mode=TwoWay}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ListBox x:Name="State"  Style="{StaticResource MaterialDesignToolToggleListBox}" materialDesign:ListBoxAssist.IsToggle="False" Height="37" SelectedIndex="{Binding Path=State, Mode=TwoWay}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False">
                     <ListBoxItem>
                         <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"><Run Text="禁用"/></TextBlock>
                     </ListBoxItem>

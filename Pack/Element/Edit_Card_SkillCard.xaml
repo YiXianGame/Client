@@ -97,8 +97,7 @@
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1" Margin="0,0,-90,0">
             <ToggleButton x:Name="Is_Basic_Copy" IsChecked="{Binding Is_Self}" Style="{StaticResource MaterialDesignActionLightToggleButton}" Background="Lavender" ToolTip="此技能是否释放于自己" Margin="0,17,17,0"  HorizontalAlignment="Right" VerticalAlignment="Top"/>
-            <ToggleButton x:Name="Is_Basic_Element" IsChecked="{Binding Is_Basic}" Style="{StaticResource MaterialDesignActionLightToggleButton}" Background="SkyBlue" ToolTip="是否为基础卡包" Margin="0,60,17,0"  HorizontalAlignment="Right" VerticalAlignment="Top"/>
-            <TextBox Style="{StaticResource  MaterialDesignComboBoxEditableTextBox}" Margin="194,24,194,151" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontFamily="楷体" FontWeight="Bold" FontSize="30"/>
+            <TextBox  Margin="194,24,194,151" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Name}" FontFamily="楷体" FontWeight="Bold" FontSize="30"/>
             <TextBox 
     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
     VerticalAlignment="Top"
@@ -109,7 +108,9 @@
     materialDesign:HintAssist.Hint="技能说明"
     Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
     Margin="112,110,112,0" />
-
+            <Button Margin="544,45,150,170" Width="30" Height="30">
+                <materialDesign:PackIcon Kind="Check" Foreground="GreenYellow"  Width="30" Height="30" Margin="-17,-10,-15,-10"/>
+            </Button>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,-90,0">
             <Grid Margin="124,12,124,195" x:Name="G1" VerticalAlignment="Center" Height="163">
@@ -167,10 +168,13 @@
 
             <Button
     Style="{StaticResource MaterialDesignOutlinedButton}"
-    Height="Auto" Margin="402,304,116,20" FontSize="18" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_2" Content="关闭"/>
+    Height="Auto" Margin="493,303,25,21" FontSize="18" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_2" Content="关闭"/>
             <Button
                 Style="{StaticResource MaterialDesignOutlinedButton}"
-                Height="Auto" Margin="120,304,398,20" FontSize="18" Content="删除" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_3"/>
+                Height="Auto" Margin="264,303,254,21" FontSize="18" Content="删除" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_3"/>
+            <Button
+                Style="{StaticResource MaterialDesignOutlinedButton}"
+                Height="Auto" Margin="34,304,484,20" FontSize="18" Content="上传云端" FontWeight="Bold" FontFamily="楷体" Click="Button_Click_5"/>
         </Grid>
         <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="18,243,18,0" Grid.RowSpan="2" Width="300" Height="312">
 

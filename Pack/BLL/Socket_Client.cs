@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Make.MODEL;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -57,21 +58,23 @@ namespace Pack.BLL
             {
                 try
                 {
-                    byte[] ser_msg = new byte[1024];
+                    byte[] ser_msg = new byte[20480];
                     int count = client_socket.Receive(ser_msg);
                     string origin_msg = Encoding.UTF8.GetString(ser_msg, 0, count);
+                    Console.WriteLine("总计字节:"+ count +" 内容:" + origin_msg);
                     foreach(string str_msg in origin_msg.Split('&'))
                     {
+                        //GeneralControl.CQLog.Debug("服务端", str_msg);
                         if (count > 0)
                         {
-                            string[] msg = str_msg.Split('#');
+                            string[] msg = str_msg.Split('$');
                             if (msg.Length >= 2)
                             {
                                 if (msg[0] == "客户端") XY.Client_Recieve_Server(msg[1]);
                                 else if (msg[0] == "CQ")
                                 {
                                     string[] cq_msg = msg[1].Split('|');
-                                    if (cq_msg.Length == 3) XY.Send_To_CQ(cq_msg[2], long.Parse(cq_msg[0]), long.Parse(cq_msg[1]));
+                                    if (cq_msg.Length == 3) XY.Send_To_CQ(escape(cq_msg[2]), long.Parse(cq_msg[0]), long.Parse(cq_msg[1]));
                                 }
                             }
                         }
@@ -79,12 +82,15 @@ namespace Pack.BLL
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("代号为：{0}的服务端已经断开！");
+                    Debug.WriteLine("离线");
                     //**离线操作
                 }
             }
         }
-
+        private string escape(string msg)
+        {
+            return msg.Replace("[", "&#91;").Replace("]", "&#93;");
+        }
         /// <summary>
         /// 向服务器发送请求
         /// </summary>

@@ -4,6 +4,7 @@ using Pack.BLL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Make.MODEL
         public static Socket_Client socket;
         public static CQApi CQApi;
         public static CQLog CQLog;
+        public static Pack.MainWindow MainMenu;
         /// <summary>
         /// 技能卡MODEL
         /// </summary>
@@ -81,21 +83,31 @@ namespace Make.MODEL
 
             public string Expiration_Date { get; set; } = DateTime.Now.ToString();
         }
-        public class Menu_Person_Informations_Class
+        public class Menu_Person_Informations_Class : INotifyPropertyChanged
         {
+            public event PropertyChangedEventHandler PropertyChanged = delegate { };
             static Menu_Person_Informations_Class()
-            {
-                
+            {               
                 Instance = new Menu_Person_Informations_Class();
             }
             private Menu_Person_Informations_Class()
             {
-                Author.Name = "剑仙";
-                Author.Informations = "御剑乘风";
+
             }
             public static Menu_Person_Informations_Class Instance { get; private set; } = null;
-            public Author Author { get; set; } = new Author();
-            
+            private Author author;
+            public Author Author
+            {
+                get { return author; }
+                set
+                {
+                    if (Author != value)
+                    {
+                        author = value;
+                        PropertyChanged(this, new PropertyChangedEventArgs("Author"));
+                    }
+                } 
+            }
         }
 
         public class Menu_Lience_Class

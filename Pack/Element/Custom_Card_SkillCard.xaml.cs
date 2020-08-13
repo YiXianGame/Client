@@ -30,11 +30,12 @@ namespace Pack.Element
             InitializeComponent();         
             DataContext = skillCards.SkillCards[0];
             SkillCardsModel = skillCards;
-            InitializeComponent();
+            Cloud.Content = SkillCardsModel.Cloud;
         }
         public Custom_Card_SkillCard()
         {
             InitializeComponent();
+            
         }
         private void Rate_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<int> e)
         {
