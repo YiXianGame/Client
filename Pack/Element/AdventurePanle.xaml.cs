@@ -17,13 +17,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Collections;
+using Pack.BLL;
 
 namespace Pack.Element
 {
     /// <summary>
     /// CardPanle.xaml 的交互逻辑
     /// </summary>
-    public partial class AdventurePanle
+    public partial class AdventurePanle : UserControl
     {
         public int NowFirst = 0;
         Adventure Filter_Adventure = new Adventure();
@@ -107,22 +108,20 @@ namespace Pack.Element
                 Mp = 20,
                 Probability = 30
             };
-            string temp;
-            temp = "新奇遇";
-            if ((from Adventure item in GeneralControl.Adventures where item.Name==temp select item).Any())
-            {
-                MessageBox.Show("发现重复技能名");
-                return;
-            }
-            adventure.Name = temp;
+            adventure.Name = "新奇遇";
             adventure.Save();
-            GeneralControl.Adventures.Add(adventure);
+            adventure.Add_To_General();
             Add_Adventure(adventure);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Fitler();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            XY.Send_To_Server("获取奇遇");
         }
     }
 }

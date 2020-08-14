@@ -13,5 +13,6 @@ namespace Pack
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

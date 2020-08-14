@@ -27,7 +27,6 @@ namespace Make.MODEL
         private int self_Mp;//自我能量
         private int direct_Mp;//指向能量
         private List<State> effect_States=new List<State>();//状态
-        private List<Player> directs =new List<Player>();
         private long owner;
         private bool is_Magic;//是否魔法
         private bool is_Physics;//是否物理
@@ -35,28 +34,34 @@ namespace Make.MODEL
         private bool is_Cure;//是否治疗
         private bool is_Attack;//是否攻击
         private bool is_Eternal;//是否永恒
-        private int state=-1;//技能卡状态
+        private bool is_Basic;//是否基础卡组
+        private int state=1;//技能卡状态(0 禁用 1 开启 2售卖)
         private string messages="";//技能反馈
         private int amount;//技能卡数量
         private DateTime date_Latest;
-        private int attack_Number;
+        private int attack_Number=1;
         public string Name 
         { 
             get => name;
             set
             {
-                if (GeneralControl.Skill_Card_Dictionary.ContainsKey(value))
+                if (GeneralControl.Skill_Card_Dictionary.ContainsKey(name) && GeneralControl.Skill_Card_Dictionary.ContainsValue(this))
                 {
-                    return;
-                }
-                if (GeneralControl.Skill_Card_Dictionary.ContainsKey(name))
-                {
-                    GeneralControl.Skill_Card_Dictionary.Remove(name);
-                    GeneralControl.Skill_Card_Dictionary.Add(value, this);
+                    if (GeneralControl.Skill_Card_Dictionary.ContainsKey(value))
+                    {
+                        Name = value + "-副本";
+                        return;
+                    }
+                    else
+                    {
+                        GeneralControl.Skill_Card_Dictionary.Remove(name);
+                        GeneralControl.Skill_Card_Dictionary.Add(value, this);
+                    }
                 }
                 name = value;
             }
         }
+        public bool Is_Basic { get => is_Basic; set => is_Basic = value; }
         public int Level { get => level; set => level = value; }
         public int Amount { get => amount; set => amount = value; }
         public int Need_Mp { get => need_Mp; set => need_Mp = value; }
@@ -72,7 +77,6 @@ namespace Make.MODEL
         public string Description { get => description; set => description = value; }
         public int Attack_Number { get => attack_Number; set => attack_Number = value; }
         public bool Is_Self { get => is_Self; set => is_Self = value; }
-        public List<Player> Directs { get => directs; set => directs = value; }
         public long Owner { get => owner; set => owner = value; }
         public bool Is_Cure { get => is_Cure; set => is_Cure = value; }
         public bool Is_Attack { get => is_Attack; set => is_Attack = value; }
@@ -80,11 +84,6 @@ namespace Make.MODEL
         public bool Is_Physics { get => is_Physics; set => is_Physics = value; }
         public int Father_ID { get => father_ID; set => father_ID = value; }
         public DateTime Date_Latest { get => date_Latest; set => date_Latest = value; }
-
-        public  SkillCard()
-        {
-
-        }
         public void SetName(string skill_name)
         {
             name = skill_name;

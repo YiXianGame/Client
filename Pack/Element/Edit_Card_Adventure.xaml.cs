@@ -1,27 +1,11 @@
 ﻿using Make.MODEL;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
+using Newtonsoft.Json;
+using Pack.BLL;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Pack.Element
 {
@@ -35,6 +19,7 @@ namespace Pack.Element
         public Edit_Card_Adventure()
         {
             InitializeComponent();
+            Custom_Card_Adventure.State.IsEnabled = true;
         }
 
 
@@ -43,7 +28,8 @@ namespace Pack.Element
             Origin_Custom_Card = adventureCard;
             Custom_Card_Adventure.AdventureCard = adventureCard.AdventureCard;
             Custom_Card_Adventure.DataContext = adventureCard.AdventureCard;
-            Visibility = Visibility.Visible;            
+            Visibility = Visibility.Visible;
+            Custom_Card_Adventure.State.IsEnabled = false;
         }
 
 
@@ -69,7 +55,8 @@ namespace Pack.Element
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //**保存
+            Origin_Custom_Card.AdventureCard.Save();
+            Custom_Card_Adventure.State.IsEnabled = false;
             this.Visibility = Visibility.Hidden;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -96,6 +83,7 @@ namespace Pack.Element
             if (Custom_Card_Adventure.AdventureCard.Effect_States.Count >= Make.MODEL.GeneralControl.MaxStates)
             {
                 MessageBox.Show("状态数量已满");
+                States_Select.Visibility = Visibility.Hidden;
                 return;
             }
             State state = new State
@@ -111,6 +99,11 @@ namespace Pack.Element
             Origin_Custom_Card.DataContext = adventure;
             Origin_Custom_Card.DataContext = Custom_Card_Adventure.AdventureCard;
             States_Select.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            XY.Send_To_Server("奇遇上传#" + JsonConvert.SerializeObject(Origin_Custom_Card.AdventureCard));
         }
     }
 }

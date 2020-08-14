@@ -17,16 +17,17 @@ namespace Make.MODEL
     {
 
         private SkillCard[] skillCards;
-        private bool is_Basic;
         private int iD;
         public SkillCard[] SkillCards { get => skillCards; set => skillCards = value; }
+        private long author_ID;
         public int ID { get => iD; set => iD = value; }
-        public bool Is_Basic { get => is_Basic; set => is_Basic = value; }
+        public long Author_ID { get => author_ID; set => author_ID = value; }
+        public string Cloud { get => cloud; set => cloud = value; }
 
+        private string cloud = "非云端";
         public SkillCardsModel()
         {
             ID = GetHashCode();
-
         }
         public SkillCardsModel(SkillCard[] Bind)
         {
@@ -43,11 +44,21 @@ namespace Make.MODEL
         public void Delete()
         {
             string filepath = GeneralControl.directory + "\\技能卡\\" + ID + ".json";
-            foreach(SkillCard item in skillCards)
+            GeneralControl.Skill_Cards.Remove(this);
+            foreach (SkillCard item in skillCards)
             {
                 GeneralControl.Skill_Card_Dictionary.Remove(item.Name);
             }
             File.Delete(filepath);
+        }
+        public void Add_To_General()
+        {
+            foreach (SkillCard skill in skillCards)
+            {
+                while ((from SkillCard item in GeneralControl.Skill_Card_Dictionary.Values where item.Name == skill.Name select item).Any()) skill.Name = skill.Name + "-副本";
+                GeneralControl.Skill_Card_Dictionary.Add(skill.Name,skill);
+            }
+            GeneralControl.Skill_Cards.Add(this);     
         }
     }
 }
