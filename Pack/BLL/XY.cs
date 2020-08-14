@@ -28,12 +28,27 @@ namespace Pack.BLL
         {
             if (fromgroup == -1)
             {
-                GeneralControl.CQApi.SendPrivateMessage(frompersonal, "&#91;CQ:json,data=" + File.ReadAllText(@"D:\YuanMa\XianYu_XianZhan_CQ\Pack\TextFile1.txt") + "&#93;");
+                GeneralControl.CQApi.SendPrivateMessage(frompersonal, msg);
             }
             else
             {
                 GeneralControl.CQApi.SendGroupMessage(fromgroup, msg);
             }
+        }
+        public static void Send_To_CQ_XML(string msg, long frompersonal, long fromgroup = -1)
+        {
+            if (fromgroup == -1)
+            {
+                GeneralControl.CQApi.SendPrivateMessage(frompersonal, "[CQ:xml,data=" + escape(msg) + "]" );
+            }
+            else
+            {
+                GeneralControl.CQApi.SendPrivateMessage(frompersonal, "[CQ:xml,data=" + escape(msg) + "]");
+            }
+        }
+        private static string escape(string msg)
+        {
+            return msg.Replace("&", "&amp;").Replace("[", "&#91;").Replace("]", "&#93;").Replace(",", "&#44;");
         }
         public static void Client_Recieve_Server(string msg)
         {

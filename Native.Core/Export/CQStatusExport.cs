@@ -1,6 +1,6 @@
-/&
- & 此文件由T4引擎自动生成, 请勿修改此文件中的代码!
- &/
+/*
+ * 此文件由T4引擎自动生成, 请勿修改此文件中的代码!
+ */
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -34,30 +34,30 @@ namespace Native.App.Export
 		/// 读取容器中的注册项, 进行事件分发	
 		/// </summary>	
 		private static void ResolveBackcall ()	
-		{	
-			/&	
-			 & Id: 1	
-			 & Name: 运行时间	
-			 & Title: UPTIME	
-			 & Function: _statusUptime	
-			 & Period: 1000	
-			 &/	
+		{
+			/*	
+			 * Id: 1	
+			 * Name: 运行时间	
+			 * Title: UPTIME	
+			 * Function: _statusUptime	
+			 * Period: 1000	
+			 */
 			if (AppData.UnityContainer.IsRegistered<IStatusUpdate> ("运行时间"))	
 			{	
 				Status_statusUptimeHandler += AppData.UnityContainer.Resolve<IStatusUpdate> ("运行时间").StatusUpdate;	
 			}	
 			
-		}	
-		#endregion	
-		
+		}
+		#endregion
+
 		#region --导出方法--	
-		/&	
-		 & Id: 1	
-		 & Name: 运行时间	
-		 & Title: UPTIME	
-		 & Function: _statusUptime	
-		 & Period: 1000	
-		 &/	
+		/*	
+		 * Id: 1	
+		 * Name: 运行时间	
+		 * Title: UPTIME	
+		 * Function: _statusUptime	
+		 * Period: 1000	
+		 */
 		public static event Func<object, CQStatusUpdateEventArgs, CQFloatWindow> Status_statusUptimeHandler;	
 		[DllExport (ExportName = "_statusUptime", CallingConvention = CallingConvention.StdCall)]	
 		public static string Status_statusUptime ()	

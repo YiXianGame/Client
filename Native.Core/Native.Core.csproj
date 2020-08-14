@@ -133,6 +133,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
+      <Project>{D7A958B3-79D9-49F8-8BB4-9619BAB6ECBA}</Project>
+      <Name>Native.Sdk</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pack\Pack.csproj">
       <Project>{c0459bbc-d3f6-4643-b652-dfbfd0b65e65}</Project>
       <Name>Pack</Name>

@@ -74,7 +74,17 @@ namespace Pack.BLL
                                 else if (msg[0] == "CQ")
                                 {
                                     string[] cq_msg = msg[1].Split('|');
-                                    if (cq_msg.Length == 3) XY.Send_To_CQ(escape(cq_msg[2]), long.Parse(cq_msg[0]), long.Parse(cq_msg[1]));
+                                    if (cq_msg.Length == 4)
+                                    {
+                                        if (cq_msg[0] == "Common")
+                                        {
+                                            XY.Send_To_CQ(cq_msg[3], long.Parse(cq_msg[1]), long.Parse(cq_msg[2]));
+                                        }
+                                        else if (cq_msg[0] == "XML")
+                                        {
+                                            XY.Send_To_CQ_XML(cq_msg[3], long.Parse(cq_msg[1]), long.Parse(cq_msg[2]));
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -86,10 +96,6 @@ namespace Pack.BLL
                     //**离线操作
                 }
             }
-        }
-        private string escape(string msg)
-        {
-            return msg.Replace("[", "&#91;").Replace("]", "&#93;");
         }
         /// <summary>
         /// 向服务器发送请求
