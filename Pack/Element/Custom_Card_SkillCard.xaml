@@ -160,7 +160,7 @@
             <Border Grid.Row="2" Grid.Column="0"  BorderThickness="0 0 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Margin="0">
                 <Grid Margin="0">
                     <Button Style="{DynamicResource MaterialDesignFlatButton}"
-                                x:Name="AuthorButton" Margin="20,2,130,-2" Width="90" Height="30" >
+                                x:Name="AuthorButton" Margin="20,2,130,-2" Width="90" Height="30" Click="AuthorButton_Click" >
                         <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="Account" Width="18" Height="18" />
                             <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" FontFamily="楷体" FontWeight="Bold" Text="作者"/>

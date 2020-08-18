@@ -17,22 +17,34 @@ namespace Make.MODEL
     {
 
         private SkillCard[] skillCards;
-        private int iD;
+        private string iD;
         public SkillCard[] SkillCards { get => skillCards; set => skillCards = value; }
         private long author_ID;
-        public int ID { get => iD; set => iD = value; }
+        public string ID { get => iD; set => iD = value; }
         public long Author_ID { get => author_ID; set => author_ID = value; }
         public string Cloud { get => cloud; set => cloud = value; }
 
         private string cloud = "非云端";
         public SkillCardsModel()
         {
-            ID = GetHashCode();
+            string temp_id;
+            do
+            {
+                temp_id = Guid.NewGuid().ToString();
+            }
+            while (File.Exists(GeneralControl.directory + "\\技能卡\\" + temp_id + ".json"));
+            ID = temp_id;
         }
         public SkillCardsModel(SkillCard[] Bind)
         {
             skillCards = Bind;
-            ID = GetHashCode();
+            string temp_id;
+            do
+            {
+                temp_id = Guid.NewGuid().ToString();
+            }
+            while (File.Exists(GeneralControl.directory + "\\技能卡\\" + temp_id + ".json"));
+            ID = temp_id;
             foreach (SkillCard item in Bind) item.Father_ID = ID;
         }
         public void Save()
@@ -53,6 +65,7 @@ namespace Make.MODEL
         }
         public void Add_To_General()
         {
+
             foreach (SkillCard skill in skillCards)
             {
                 while ((from SkillCard item in GeneralControl.Skill_Card_Dictionary.Values where item.Name == skill.Name select item).Any()) skill.Name = skill.Name + "-副本";

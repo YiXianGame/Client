@@ -39,8 +39,18 @@ namespace Pack.Element
             AdventurePanel.Children.Add(card);
             if (Make.MODEL.GeneralControl.LazyLoad_SkillCards) if (AdventurePanel.Children.Count >= 96) card.Visibility = Visibility.Collapsed;
             card.EditButton.Click += EditButton_Click;
+            card.AuthorButton.Click += AuthorButton_Click;
             return card;
         }
+
+        private void AuthorButton_Click(object sender, RoutedEventArgs e)
+        {
+            DependencyObject ptr = sender as DependencyObject;
+            while (!(ptr is Custom_Card_Adventure)) ptr = VisualTreeHelper.GetParent(ptr);
+            XY.Send_To_Server("作者查询#" + (ptr as Custom_Card_Adventure).AdventureCard.Author_ID);
+            Author.Visibility = Visibility.Visible;
+        }
+
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             DependencyObject ptr = sender as DependencyObject;
@@ -108,6 +118,7 @@ namespace Pack.Element
                 Mp = 20,
                 Probability = 30
             };
+            adventure.Author_ID = GeneralControl.Menu_Person_Informations_Class.Instance.Author.ID;
             adventure.Name = "新奇遇";
             adventure.Save();
             adventure.Add_To_General();
@@ -121,7 +132,7 @@ namespace Pack.Element
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            XY.Send_To_Server("获取奇遇");
+            XY.Send_To_Server("获取奇遇#" + GeneralControl.Adventure_Date);
         }
     }
 }

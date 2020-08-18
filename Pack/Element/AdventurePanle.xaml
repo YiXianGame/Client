@@ -94,5 +94,6 @@
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
+        <local:Author x:Name="Author" HorizontalAlignment="Left" Height="440" Margin="250,110,0,0" VerticalAlignment="Top" Width="790" Visibility="Hidden"/>
     </Grid>
 </UserControl>

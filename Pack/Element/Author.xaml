@@ -41,8 +41,8 @@
     <Border CornerRadius="15" Background="White">
         <Grid Margin="0">
             <materialDesign:PackIcon Kind="Account"  Margin="75,45,600,335" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch"/>
-            <Label Content="{Binding Path=Name}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" Margin="200,45,290,335"/>
-            <Label Content="已创作的卡牌数量:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="105,240,480,145"/>
+            <Label Content="{Binding Path=Name}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" Margin="200,45,300,330"/>
+            <Label Content="已创作的卡牌数量:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="105,240,480,140"/>
             <Label Content="{Binding Path=Create_num}"  VerticalContentAlignment="Center" FontSize="30" Margin="330,240,390,145" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
             <Label Content="张" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="415,240,335,145"/>
             <Label Content="已更新的卡牌数量:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="105,325,480,60"/>

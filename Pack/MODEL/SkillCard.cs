@@ -18,7 +18,7 @@ namespace Make.MODEL
     {
         private string name="";//技能卡名称
         private int level;//技能卡等级
-        private int father_ID;//父卡类
+        private string father_ID;//父卡类
         private string description="";//技能介绍
         private int need_Mp;//所需能量
         private int probability;//概率
@@ -40,6 +40,8 @@ namespace Make.MODEL
         private int amount;//技能卡数量
         private DateTime date_Latest;
         private int attack_Number=1;
+        private string iD;
+        public string ID { get => iD; set => iD = value; }
         public string Name 
         { 
             get => name;
@@ -82,11 +84,17 @@ namespace Make.MODEL
         public bool Is_Attack { get => is_Attack; set => is_Attack = value; }
         public bool Is_Eternal { get => is_Eternal; set => is_Eternal = value; }
         public bool Is_Physics { get => is_Physics; set => is_Physics = value; }
-        public int Father_ID { get => father_ID; set => father_ID = value; }
+        public string Father_ID { get => father_ID; set => father_ID = value; }
         public DateTime Date_Latest { get => date_Latest; set => date_Latest = value; }
-        public void SetName(string skill_name)
+        public SkillCard()
         {
-            name = skill_name;
+            string temp_id;
+            do
+            {
+                temp_id = Guid.NewGuid().ToString();
+            }
+            while (File.Exists(GeneralControl.directory + "\\技能卡\\" + temp_id + ".json"));
+            ID = temp_id;
         }
     }
 }

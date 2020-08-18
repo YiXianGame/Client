@@ -1,6 +1,7 @@
 ﻿using Make.MODEL;
 using Newtonsoft.Json;
 using Pack.BLL;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,6 +58,7 @@ namespace Pack.Element
         {
             Origin_Custom_Card.AdventureCard.Save();
             Custom_Card_Adventure.State.IsEnabled = false;
+            GeneralControl.Adventure_Date = DateTime.Now;
             this.Visibility = Visibility.Hidden;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -71,6 +73,7 @@ namespace Pack.Element
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Hidden;
+            GeneralControl.Adventure_Date = DateTime.Now;
             DependencyObject ptr = sender as DependencyObject;
             while (!(ptr is AdventurePanle)) ptr = VisualTreeHelper.GetParent(ptr);
             AdventurePanle cardPanle = ptr as AdventurePanle;

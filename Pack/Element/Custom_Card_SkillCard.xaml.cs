@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Pack;
 using System.Globalization;
+using Pack.BLL;
 
 namespace Pack.Element
 {   
@@ -43,6 +44,11 @@ namespace Pack.Element
             {              
                 DataContext = SkillCardsModel.SkillCards[e.NewValue-1];
             }
+        }
+
+        private void AuthorButton_Click(object sender, RoutedEventArgs e)
+        {
+            XY.Send_To_Server("作者查询#" + SkillCardsModel.Author_ID);
         }
     }
 }

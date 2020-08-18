@@ -23,8 +23,10 @@ namespace Make.MODEL
         private string messages="";//自带信息
         private int probability;//概率
         private string description="";//奇遇的描述（介绍）
-        private int iD;
-        public int ID { get => iD; set => iD = value; }
+        private string iD;
+        private long author_ID;
+        public long Author_ID { get => author_ID; set => author_ID = value; }
+        public string ID { get => iD; set => iD = value; }
         private string cloud = "非云端";
         public string Name
         { 
@@ -58,7 +60,13 @@ namespace Make.MODEL
         }
         public Adventure()
         {
-
+            string temp_id;
+            do
+            {
+                temp_id = Guid.NewGuid().ToString();
+            }
+            while (File.Exists(GeneralControl.directory + "\\技能卡\\" + temp_id + ".json"));
+            ID = temp_id;
         }
         public void Save()
         {

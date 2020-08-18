@@ -54,15 +54,6 @@ namespace Pack.BLL
             {
                 string json = File.ReadAllText(file.FullName);
                 SkillCardsModel skillCardsModel = JsonConvert.DeserializeObject<SkillCardsModel>(json);
-                foreach (SkillCard item in skillCardsModel.SkillCards)
-                {
-                    List<State> List = new List<State>();
-                    foreach (State item_1 in item.Effect_States)
-                    {
-                        State state = new State();
-                    }
-                }
-
                 skillCardsModel.Add_To_General();
             }
         }

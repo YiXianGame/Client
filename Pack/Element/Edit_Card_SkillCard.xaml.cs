@@ -1,6 +1,7 @@
 ﻿using Make.MODEL;
 using Newtonsoft.Json;
 using Pack.BLL;
+using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -47,6 +48,12 @@ namespace Pack.Element
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Hidden;
+            DateTime dateTime = DateTime.Now;
+            foreach (SkillCard item in Origin_Custom_Card.SkillCardsModel.SkillCards)
+            {
+                item.Date_Latest = dateTime;
+            }
+            GeneralControl.Skill_Card_Date = dateTime;
             Custom_Card.State.IsEnabled = false;
             Origin_Custom_Card.SkillCardsModel.Save();
         }
@@ -54,6 +61,7 @@ namespace Pack.Element
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Hidden;
+            DateTime dateTime = DateTime.Now;
             DependencyObject ptr = sender as DependencyObject;
             while (!(ptr is MainWindow)) ptr = VisualTreeHelper.GetParent(ptr);
             MainWindow  mainWindow  = ptr as MainWindow;
@@ -64,7 +72,7 @@ namespace Pack.Element
             {
                 GeneralControl.Skill_Card_Dictionary.Remove(item.Name);
             }
-            Debug.WriteLine(GeneralControl.Skill_Cards.Count);
+            GeneralControl.Skill_Card_Date = dateTime;
             mainWindow.CardPanle.CardsPanel.Children.Remove(Origin_Custom_Card);
         }
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -34,6 +34,7 @@ namespace Pack.Element
         {
             InitializeComponent();
             Filter_Skill.State = -1;
+            Author.DataContext = GeneralControl.Menu_Person_Informations_Class.Instance.Author;
             Filter_Bar.DataContext = Filter_Skill;
         }
 
@@ -51,7 +52,7 @@ namespace Pack.Element
         {
             DependencyObject ptr = sender as DependencyObject;
             while (!(ptr is Custom_Card_SkillCard)) ptr = VisualTreeHelper.GetParent(ptr);
-            XY.Send_To_Server("作者信息&" + (ptr as Custom_Card_SkillCard).SkillCardsModel.Author_ID);
+            XY.Send_To_Server("作者查询#" + (ptr as Custom_Card_SkillCard).SkillCardsModel.Author_ID);
             Author.Visibility = Visibility.Visible;
         }
 
@@ -63,7 +64,7 @@ namespace Pack.Element
         }
         private void Fitler()
         {
-            Filter_Skill.SetName(Template_Skill_Name.Text);
+            Filter_Skill.Name = Template_Skill_Name.Text;
             IEnumerable<SkillCardsModel> array = Make.MODEL.Filter.SkillCardsModel(Make.MODEL.GeneralControl.Skill_Cards, Rate.Value - 1, Filter_Skill);
             foreach (Custom_Card_SkillCard item in CardsPanel.Children)
             {  
@@ -125,6 +126,7 @@ namespace Pack.Element
                 item.Name = "新技能" + (++cnt).ToString();
             }
             SkillCardsModel skillCardsModel = new SkillCardsModel(skillCards);
+            skillCardsModel.Author_ID = GeneralControl.Menu_Person_Informations_Class.Instance.Author.ID;
             skillCardsModel.Add_To_General();
             skillCardsModel.Save();
             Add_Card(skillCardsModel);
@@ -137,7 +139,7 @@ namespace Pack.Element
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            XY.Send_To_Server("获取技能卡");
+            XY.Send_To_Server("获取技能卡#" + GeneralControl.Skill_Card_Date);
         }
     }
 }

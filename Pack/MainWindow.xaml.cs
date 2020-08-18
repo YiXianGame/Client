@@ -32,8 +32,8 @@ namespace Pack
         {
             GeneralControl.MainMenu = this;           
             InitializeComponent();
-            Init();
             BLL.Init init = new Init();
+            Init();
         }
 
         private void Init()
@@ -44,7 +44,8 @@ namespace Pack
             Menu_Person_Informations.DataContext = GeneralControl.Menu_Person_Informations_Class.Instance;
             Menu_Version_Informations.DataContext = GeneralControl.Menu_Version_Informations_Class.Instance;
             Menu_Skill_Cards.DataContext = GeneralControl.Menu_Skill_Cards_Class.Instance;
-            CardPanle.Author.DataContext = author;
+            XY.Send_To_Server("用户#" + GeneralControl.CQApi.GetLoginQQ());
+            //XY.Send_To_Server("用户#" + 3028394801);
         }
 
         private void SkillCardsPanle_Initialized(object sender, EventArgs e)
@@ -112,7 +113,8 @@ namespace Pack
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            XY.Send_To_Server("用户#" + 3028394801);
+            XY.Send_To_Server("用户#" + GeneralControl.CQApi.GetLoginQQ());
+           // XY.Send_To_Server("用户#" + 3028394801);
         }
     }
 }

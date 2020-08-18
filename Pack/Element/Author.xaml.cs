@@ -31,7 +31,6 @@ namespace Pack.Element
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Hidden;
-            XY.Send_To_Server("Author&" + JsonConvert.SerializeObject(GeneralControl.Menu_Person_Informations_Class.Instance.Author));
         }
     }
 }

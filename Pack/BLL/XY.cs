@@ -61,6 +61,26 @@ namespace Pack.BLL
                     {
                         GeneralControl.Menu_Person_Informations_Class.Instance.Author = JsonConvert.DeserializeObject<Make.MODEL.Author>(data[1]);                        
                     }
+
+                }
+                else if (data.Length == 2 && data[0] == "作者查询")
+                {
+                    GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
+                    {
+                        if (data[1] != null)
+                        {
+                            GeneralControl.MainMenu.CardPanle.Author.DataContext = JsonConvert.DeserializeObject<Make.MODEL.Author>(data[1]);
+                            GeneralControl.MainMenu.AdventurePanle.Author.DataContext = JsonConvert.DeserializeObject<Make.MODEL.Author>(data[1]);
+                        }
+                    });
+                }
+                else if (data.Length == 2 && data[0] == "更新卡牌版本")
+                {
+                    GeneralControl.Skill_Card_Date = DateTime.Parse(data[1]);
+                }
+                else if (data.Length == 2 && data[0] == "更新奇遇版本")
+                {
+                    GeneralControl.Adventure_Date = DateTime.Parse(data[1]);
                 }
                 else if(data.Length==2 && data[0] == "获取技能卡")
                 {
@@ -68,23 +88,36 @@ namespace Pack.BLL
                     foreach(SkillCardsModel item in skillCardsModels)
                     {
                         item.Cloud = "云端";
-                        GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
+                        SkillCard out_skill;
+                        foreach(SkillCard skillCard in item.SkillCards)
                         {
-                            Custom_Card_SkillCard skillCards = (from Custom_Card_SkillCard ienum_item in GeneralControl.MainMenu.CardPanle.CardsPanel.Children where item.ID == ienum_item.SkillCardsModel.ID select ienum_item).FirstOrDefault();
-                            if (skillCards!=null)
-                            {
-                                skillCards.SkillCardsModel.Delete();
-                                skillCards.SkillCardsModel = item;
-                                skillCards.Cloud.Content = item.Cloud;
-                                skillCards.DataContext = skillCards.SkillCardsModel.SkillCards[skillCards.Rate.Value - 1];
+                            if(GeneralControl.Skill_Card_Dictionary.TryGetValue(skillCard.Name,out out_skill) && GeneralControl.Skill_Card_Dictionary[skillCard.Name].Date_Latest == skillCard.Date_Latest)
+                            {                            
+                                continue;
                             }
                             else
                             {
-                                GeneralControl.MainMenu.CardPanle.Add_Card(item);
+                                Console.WriteLine(skillCard.Name+"没跳过");
+                                GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
+                                {
+                                    Custom_Card_SkillCard skillCards = (from Custom_Card_SkillCard ienum_item in GeneralControl.MainMenu.CardPanle.CardsPanel.Children where item.ID == ienum_item.SkillCardsModel.ID select ienum_item).FirstOrDefault();
+                                    if (skillCards != null)
+                                    {
+                                        skillCards.SkillCardsModel.Delete();
+                                        skillCards.SkillCardsModel = item;
+                                        skillCards.Cloud.Content = item.Cloud;
+                                        skillCards.DataContext = skillCards.SkillCardsModel.SkillCards[skillCards.Rate.Value - 1];
+                                    }
+                                    else
+                                    {
+                                        GeneralControl.MainMenu.CardPanle.Add_Card(item);
+                                    }
+                                    item.Add_To_General();
+                                    item.Save();
+                                });
+                                break;
                             }
-                            item.Add_To_General();
-                            item.Save();
-                        });                      
+                        }    
                     }
                 }
                 else if (data.Length == 2 && data[0] == "获取奇遇")
