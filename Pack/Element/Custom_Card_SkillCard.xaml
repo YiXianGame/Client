@@ -129,7 +129,6 @@
                                 </ListBoxItem>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-
                     </ListBox>
                     <Label x:Name="Cloud"  HorizontalAlignment="Left" Height="20" Margin="246,203,-66,-88" VerticalAlignment="Top" Width="60" FontSize="11" FontWeight="Bold"  Foreground="#DD00AEFF"/>
                 </Grid>

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Pack.BLL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -30,16 +31,15 @@ namespace Pack
 
         public MainWindow()
         {
-            GeneralControl.MainMenu = this;           
+            //BLL.Init init = new Init(); //测试单机的时候用
             InitializeComponent();
-            BLL.Init init = new Init();
             Init();
         }
 
         private void Init()
         {
             UI_Init();
-            Menu_Adventure_Cards.DataContext = GeneralControl.Menu_Adventure_Cards_Class.Instance;
+            Menu_Adventure_Cards.DataContext = GeneralControl.Menu_Adventure_Cards_Class.Instance;  
             Menu_Lience.DataContext = GeneralControl.Menu_Lience_Class.Instance;
             Menu_Person_Informations.DataContext = GeneralControl.Menu_Person_Informations_Class.Instance;
             Menu_Version_Informations.DataContext = GeneralControl.Menu_Version_Informations_Class.Instance;
@@ -115,6 +115,11 @@ namespace Pack
         {
             XY.Send_To_Server("用户#" + GeneralControl.CQApi.GetLoginQQ());
            // XY.Send_To_Server("用户#" + 3028394801);
+        }
+
+        private void Menu_Button_1_Copy5_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
         }
     }
 }

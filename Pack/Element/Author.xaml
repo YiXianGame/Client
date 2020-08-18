@@ -39,6 +39,9 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Border CornerRadius="15" Background="White">
+        <Border.Effect>
+            <DropShadowEffect Color="Cyan" BlurRadius="10" ShadowDepth="0" Opacity="1" />
+        </Border.Effect>
         <Grid Margin="0">
             <materialDesign:PackIcon Kind="Account"  Margin="75,45,600,335" Height="Auto" HorizontalAlignment="Stretch" Width="Auto" VerticalAlignment="Stretch"/>
             <Label Content="{Binding Path=Name}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" Margin="200,45,300,330"/>
@@ -49,7 +52,7 @@
             <Label Content="{Binding Path=Upgrade_num}"  VerticalContentAlignment="Center" FontSize="30" Margin="330,325,390,60" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
             <Label Content="张" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="415,325,335,60"/>
             <Label Content="QQ号:" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Margin="105,145,595,235"/>
-            <Label Content="{Binding Path=ID}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Margin="215,145,335,235"/>
+            <Label Content="{Binding Path=QQ}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Margin="215,145,335,235"/>
             <TextBlock Margin="504,49,21,26" TextWrapping="Wrap" Text="{Binding Path=Informations}" FontSize="30"/>
             <Button Height="Auto" Margin="752,6,13,409" Click="Button_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="IndianRed"/>
         </Grid>

@@ -1,4 +1,5 @@
-﻿using Native.Sdk.Cqp.EventArgs;
+﻿using Make.MODEL;
+using Native.Sdk.Cqp.EventArgs;
 using Native.Sdk.Cqp.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,32 +13,36 @@ namespace Pack
 {
     public class Menu_OpenWindow : IMenuCall
     {
-        ManualResetEvent manualResetEvent;
         private Thread thread;
-        bool open = false;
+        ManualResetEvent manualResetEvent = new ManualResetEvent(false);
         public void MenuCall(object sender, CQMenuCallEventArgs e)
         {
-            if(thread == null)
+            try
             {
-                thread = new Thread(new ThreadStart(() =>
+                if (GeneralControl.MainMenu == null)
                 {
-                    while (true)
+                    thread = new Thread(new ThreadStart(() =>
                     {
-                        open = true;
-                        new MainWindow().ShowDialog();
-                        GC.Collect();
-                        open = false;
-                        manualResetEvent = new ManualResetEvent(false);
-                        Console.WriteLine("窗体Event返回:" + manualResetEvent.WaitOne());
-                    }
-                }));
-                thread.SetApartmentState(ApartmentState.STA);
-                thread.Start();
+
+                        while (true)
+                        {
+                            GeneralControl.MainMenu = new MainWindow();
+                            GeneralControl.MainMenu.ShowDialog();
+                            manualResetEvent.Reset();
+                            manualResetEvent.WaitOne();
+                        }
+                    }));
+                    thread.SetApartmentState(ApartmentState.STA);
+                    thread.Start();
+                }
+                else
+                {
+                    manualResetEvent.Set();
+                }
             }
-            else
+            catch (Exception err)
             {
-                if (open) Console.WriteLine("窗体已经打开");
-                else manualResetEvent.Set();
+                Console.WriteLine(err.Message);
             }
         }
 

@@ -128,56 +128,80 @@ namespace Make.MODEL
         }
         public class Menu_Skill_Cards_Class
         {
-            static Menu_Skill_Cards_Class()
-            {
-                Instance = new Menu_Skill_Cards_Class();
-            }
             private Menu_Skill_Cards_Class()
             {
 
             }
-            public static Menu_Skill_Cards_Class Instance { get; private set; } = null;
+            private static readonly Lazy<Menu_Skill_Cards_Class> lazy = new Lazy<Menu_Skill_Cards_Class>(() =>
+            {
+                if (File.Exists(GeneralControl.directory + @"\游戏配置\Menu_Skill_Cards_Class.json"))
+                {
+                    return JsonConvert.DeserializeObject<Menu_Skill_Cards_Class>(File.ReadAllText(GeneralControl.directory + @"\游戏配置\Menu_Skill_Cards_Class.json"));
+                }
+                else return new Menu_Skill_Cards_Class();
+            });
+            public static Menu_Skill_Cards_Class Instance { get { return lazy.Value; } }
         }
         public class Menu_Adventure_Cards_Class
         {
-            static Menu_Adventure_Cards_Class()
-            {
-                Instance = new Menu_Adventure_Cards_Class();
-            }
             private Menu_Adventure_Cards_Class()
             {
 
             }
-            public static Menu_Adventure_Cards_Class Instance { get; private set; } = null;
+            private static readonly Lazy<Menu_Adventure_Cards_Class> lazy = new Lazy<Menu_Adventure_Cards_Class>(() =>
+            {
+                if (File.Exists(GeneralControl.directory + @"\游戏配置\Menu_Adventure_Cards_Class.json"))
+                {
+                    return JsonConvert.DeserializeObject<Menu_Adventure_Cards_Class>(File.ReadAllText(GeneralControl.directory + @"\游戏配置\Menu_Adventure_Cards_Class.json"));
+                }
+                else return new Menu_Adventure_Cards_Class();
+            });
+            public static Menu_Adventure_Cards_Class Instance { get { return lazy.Value; } }
         }
 
         public class Menu_Version_Informations_Class
         {
-            static Menu_Version_Informations_Class()
-            {
-                Instance = new Menu_Version_Informations_Class();
-            }
+            public static Menu_Version_Informations_Class Instance { get { return lazy.Value; } }
             private Menu_Version_Informations_Class()
             {
 
             }
-            public static Menu_Version_Informations_Class Instance { get; private set; } = null;
+            private static readonly Lazy<Menu_Version_Informations_Class> lazy = new Lazy<Menu_Version_Informations_Class>(() =>
+            {
+                if (File.Exists(GeneralControl.directory + @"\游戏配置\Menu_Version_Informations_Class.json"))
+                {
+                    return JsonConvert.DeserializeObject<Menu_Version_Informations_Class>(File.ReadAllText(GeneralControl.directory + @"\游戏配置\Menu_Version_Informations_Class.json"));
+                }
+                else return new Menu_Version_Informations_Class();
+            });
 
             public string Expiration_Date { get; set; } = DateTime.Now.ToString();
         }
         public class Menu_Person_Informations_Class : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler PropertyChanged = delegate { };
-            static Menu_Person_Informations_Class()
-            {               
-                Instance = new Menu_Person_Informations_Class();
-            }
-            private Menu_Person_Informations_Class()
+            private static readonly Lazy<Menu_Person_Informations_Class> lazy = new Lazy<Menu_Person_Informations_Class>(() =>
             {
-
-            }
-            public static Menu_Person_Informations_Class Instance { get; private set; } = null;
+                if (File.Exists(GeneralControl.directory + @"\游戏配置\Menu_Person_Informations_Class.json"))
+                {
+                    Menu_Person_Informations_Class menu_Person_Informations_Class = JsonConvert.DeserializeObject<Menu_Person_Informations_Class>(File.ReadAllText(GeneralControl.directory + @"\游戏配置\Menu_Person_Informations_Class.json"));
+                    menu_Person_Informations_Class.Author.ID = 123456789;
+                    return menu_Person_Informations_Class;
+                }
+                else
+                {
+                    Menu_Person_Informations_Class menu_Person_Informations_Class = new Menu_Person_Informations_Class();
+                    menu_Person_Informations_Class.Author.ID = 123456789;
+                    menu_Person_Informations_Class.Author.Name = "玩家名";
+                    menu_Person_Informations_Class.Author.Informations = "个性签名";
+                    menu_Person_Informations_Class.Author.QQ = 123456798;
+                    return menu_Person_Informations_Class;
+                }
+            });
+            public static Menu_Person_Informations_Class Instance { get { return lazy.Value; } }
             private Author author=new Author();
+
+            public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
             public Author Author
             {
                 get { return author; }
@@ -194,31 +218,35 @@ namespace Make.MODEL
 
         public class Menu_Lience_Class
         {
-            static Menu_Lience_Class()
-            {
-                Instance = new Menu_Lience_Class();
-            }
+            public static Menu_Lience_Class Instance { get { return lazy.Value; } }
             private Menu_Lience_Class()
             {
 
             }
-            public static Menu_Lience_Class Instance { get; private set; } = null;
+            private static readonly Lazy<Menu_Lience_Class> lazy = new Lazy<Menu_Lience_Class>(() =>
+            {
+                if (File.Exists(GeneralControl.directory + @"\游戏配置\Menu_Lience_Class.json"))
+                {
+                    return JsonConvert.DeserializeObject<Menu_Lience_Class>(File.ReadAllText(GeneralControl.directory + @"\游戏配置\Menu_Lience_Class.json"));
+                }
+                else return new Menu_Lience_Class();
+            });
         }
         public class Menu_GameControl_Class
         {
-            private static readonly Menu_GameControl_Class _instance = null;
-            static Menu_GameControl_Class()
-            {
-                _instance = new Menu_GameControl_Class();
-            }
             private Menu_GameControl_Class()
             {
 
             }
-            public static Menu_GameControl_Class Instance
+            private static readonly Lazy<Menu_GameControl_Class> lazy = new Lazy<Menu_GameControl_Class>(() =>
             {
-                get { return _instance; }
-            }
+                if (File.Exists(GeneralControl.directory + @"\游戏配置\Menu_GameControl_Class.json"))
+                {
+                    return JsonConvert.DeserializeObject<Menu_GameControl_Class>(File.ReadAllText(GeneralControl.directory + @"\游戏配置\Menu_GameControl_Class.json"));
+                }
+                else return new Menu_GameControl_Class();
+            });
+            public static Menu_GameControl_Class Instance { get { return lazy.Value; } }
             public int Immediate_To_Round { get; set; } = 10;
         }
     }

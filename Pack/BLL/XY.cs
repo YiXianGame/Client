@@ -61,7 +61,6 @@ namespace Pack.BLL
                     {
                         GeneralControl.Menu_Person_Informations_Class.Instance.Author = JsonConvert.DeserializeObject<Make.MODEL.Author>(data[1]);                        
                     }
-
                 }
                 else if (data.Length == 2 && data[0] == "作者查询")
                 {
@@ -85,43 +84,14 @@ namespace Pack.BLL
                 else if(data.Length==2 && data[0] == "获取技能卡")
                 {
                     List<SkillCardsModel> skillCardsModels = JsonConvert.DeserializeObject<List<SkillCardsModel>>(data[1]);
-                    foreach(SkillCardsModel item in skillCardsModels)
+                    GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
                     {
-                        item.Cloud = "云端";
-                        SkillCard out_skill;
-                        foreach(SkillCard skillCard in item.SkillCards)
-                        {
-                            if(GeneralControl.Skill_Card_Dictionary.TryGetValue(skillCard.Name,out out_skill) && GeneralControl.Skill_Card_Dictionary[skillCard.Name].Date_Latest == skillCard.Date_Latest)
-                            {                            
-                                continue;
-                            }
-                            else
-                            {
-                                Console.WriteLine(skillCard.Name+"没跳过");
-                                GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
-                                {
-                                    Custom_Card_SkillCard skillCards = (from Custom_Card_SkillCard ienum_item in GeneralControl.MainMenu.CardPanle.CardsPanel.Children where item.ID == ienum_item.SkillCardsModel.ID select ienum_item).FirstOrDefault();
-                                    if (skillCards != null)
-                                    {
-                                        skillCards.SkillCardsModel.Delete();
-                                        skillCards.SkillCardsModel = item;
-                                        skillCards.Cloud.Content = item.Cloud;
-                                        skillCards.DataContext = skillCards.SkillCardsModel.SkillCards[skillCards.Rate.Value - 1];
-                                    }
-                                    else
-                                    {
-                                        GeneralControl.MainMenu.CardPanle.Add_Card(item);
-                                    }
-                                    item.Add_To_General();
-                                    item.Save();
-                                });
-                                break;
-                            }
-                        }    
-                    }
+                        skillCardsModels.ForEach(delegate (SkillCardsModel item) { GeneralControl.MainMenu.CardPanle.Add_Card(item);});
+                    });                   
                 }
                 else if (data.Length == 2 && data[0] == "获取奇遇")
                 {
+                    GeneralControl.Adventures.ForEach((Action<Adventure>)delegate (Adventure item) { item.Cloud = "非云端"; });
                     List<Adventure> Adventures = JsonConvert.DeserializeObject<List<Adventure>>(data[1]);
                     foreach (Adventure item in Adventures)
                     {
@@ -134,7 +104,6 @@ namespace Pack.BLL
                                 Custom_Card_Adventure adventure = ienum.First();
                                 GeneralControl.Adventures.Remove(adventure.AdventureCard);
                                 adventure.AdventureCard = item;
-                                adventure.DataContext = item;
                                 item.Save();
                             }
                             else

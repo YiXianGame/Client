@@ -86,6 +86,7 @@ namespace Make.MODEL
         public bool Is_Physics { get => is_Physics; set => is_Physics = value; }
         public string Father_ID { get => father_ID; set => father_ID = value; }
         public DateTime Date_Latest { get => date_Latest; set => date_Latest = value; }
+        
         public SkillCard()
         {
             string temp_id;

@@ -90,7 +90,7 @@
                         </Grid>
                     </materialDesign:ColorZone>
                     <Button Width="60"  Margin="10,0,0,0" materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource   MaterialDesignFlatDarkBgButton}" FontFamily="楷体" Background="CornflowerBlue" BorderBrush="{x:Null}" Content="新增" Click="Button_Click_1" />
-                    <Button Width="60"  Margin="10,0,0,0" materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignFlatDarkBgButton}" FontFamily="楷体" Background="CornflowerBlue" BorderBrush="{x:Null}" Content="新增" Click="Button_Click_2" />
+                    <Button Width="60"  Margin="10,0,0,0" materialDesign:ButtonAssist.CornerRadius="15" Style="{StaticResource MaterialDesignFlatDarkBgButton}" FontFamily="楷体" Background="CornflowerBlue" BorderBrush="{x:Null}" Content="刷新" Click="Button_Click_2" />
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>

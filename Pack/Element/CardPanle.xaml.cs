@@ -34,7 +34,7 @@ namespace Pack.Element
         {
             InitializeComponent();
             Filter_Skill.State = -1;
-            Author.DataContext = GeneralControl.Menu_Person_Informations_Class.Instance.Author;
+            Author.DataContext = new Make.MODEL.Author();
             Filter_Bar.DataContext = Filter_Skill;
         }
 
@@ -45,6 +45,7 @@ namespace Pack.Element
             if (Make.MODEL.GeneralControl.LazyLoad_SkillCards) if (CardsPanel.Children.Count >= 96) card.Visibility = Visibility.Collapsed;
             card.EditButton.Click += EditButton_Click;
             card.AuthorButton.Click += AuthorButton_Click;
+            card.Cloud.Content = skillCards.Cloud;
             return card;
         }
 
@@ -121,11 +122,14 @@ namespace Pack.Element
             SkillCard[] skillCards = new SkillCard[5] { new SkillCard(),new SkillCard(),new SkillCard(),new SkillCard(),new SkillCard()};
             int cnt = 0;
             string temp;
+            SkillCardsModel skillCardsModel = new SkillCardsModel();
             foreach (SkillCard item in skillCards)
             {
+                item.Level = cnt;
                 item.Name = "新技能" + (++cnt).ToString();
+                item.Father_ID = skillCardsModel.ID;
             }
-            SkillCardsModel skillCardsModel = new SkillCardsModel(skillCards);
+            skillCardsModel.SkillCards = skillCards;
             skillCardsModel.Author_ID = GeneralControl.Menu_Person_Informations_Class.Instance.Author.ID;
             skillCardsModel.Add_To_General();
             skillCardsModel.Save();
@@ -139,6 +143,17 @@ namespace Pack.Element
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            (from Custom_Card_SkillCard item in CardsPanel.Children where item.SkillCardsModel.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_SkillCard item)
+            {
+                item.SkillCardsModel.Delete();
+                GeneralControl.Skill_Cards.Remove(item.SkillCardsModel);
+                foreach (SkillCard obj in item.SkillCardsModel.SkillCards)
+                {
+                    GeneralControl.Skill_Card_Dictionary.Remove(obj.Name);
+                }
+                GeneralControl.Skill_Card_Date = DateTime.Now;
+                CardsPanel.Children.Remove(item);
+            });
             XY.Send_To_Server("获取技能卡#" + GeneralControl.Skill_Card_Date);
         }
     }

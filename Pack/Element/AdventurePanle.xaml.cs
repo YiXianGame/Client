@@ -32,6 +32,7 @@ namespace Pack.Element
         {
             InitializeComponent();
             Filter_Bar.DataContext = Filter_Adventure;
+            Author.DataContext = new Make.MODEL.Author();
         }
         public Custom_Card_Adventure Add_Adventure(Adventure adventure)
         {
@@ -132,6 +133,13 @@ namespace Pack.Element
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            (from Custom_Card_Adventure item in AdventurePanel.Children where item.AdventureCard.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_Adventure item)
+            {
+                item.AdventureCard.Delete();
+                GeneralControl.Adventures.Remove(item.AdventureCard);
+                GeneralControl.Skill_Card_Date = DateTime.Now;
+                AdventurePanel.Children.Remove(item);
+            });
             XY.Send_To_Server("获取奇遇#" + GeneralControl.Adventure_Date);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -23,7 +24,6 @@ namespace Make.MODEL
         public string ID { get => iD; set => iD = value; }
         public long Author_ID { get => author_ID; set => author_ID = value; }
         public string Cloud { get => cloud; set => cloud = value; }
-
         private string cloud = "非云端";
         public SkillCardsModel()
         {

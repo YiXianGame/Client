@@ -73,14 +73,10 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="Menu_Skill_Cards" Header="技能设置">
-                <Grid>
-                    <Element:CardPanle x:Name="CardPanle"  Margin="0"/>
-                </Grid>
+                <Element:CardPanle x:Name="CardPanle"  Margin="0"/>
             </TabItem>
             <TabItem x:Name="Menu_Adventure_Cards" Header="奇遇设置" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="57">
-                <Grid>
-                    <Element:AdventurePanle x:Name="AdventurePanle" Margin="0"/>
-                </Grid>
+                <Element:AdventurePanle x:Name="AdventurePanle" Margin="0"/>
             </TabItem>
             <TabItem x:Name="Menu_Lience" Header="充值激活" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="57">
                 <Grid>
@@ -107,7 +103,7 @@
                     <Image HorizontalAlignment="Left" Height="80" Margin="318,245,0,0" VerticalAlignment="Top" Width="485" Source="Resources/Version_3.png" />
                     <Image HorizontalAlignment="Left" Height="55" Margin="593,360,0,0" VerticalAlignment="Top" Width="270" Source="Resources/Version_4.png" />
                     <Image HorizontalAlignment="Left" Height="60" Margin="628,500,0,0" VerticalAlignment="Top" Width="320" Source="Resources/Version_5.png" />
-                    <TextBlock Height="54" Margin="24,568,25,10" Text="{Binding Expiration_Date}" VerticalAlignment="Center" FontFamily="楷体" FontSize="50" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Height="54" Margin="24,568,25,10" Text="本版本为测试版本，请确保软件隐私安全，请勿外流！" VerticalAlignment="Center" FontFamily="楷体" FontSize="50" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"/>
                 </Grid>
             </TabItem>
         </TabControl>
@@ -180,14 +176,14 @@
                     <TextBlock Text="奇遇设置"  FontFamily="楷体" FontWeight="Bold" Margin="20,12,0,16" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
-            <Button  x:Name="Menu_Button_1_Copy5" Margin="0,15,0,0"  Height="70" Padding="0" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Menu_Button_1_Copy5_Click" BorderBrush="{x:Null}" >
+            <Button  x:Name="Menu_Button_1_Copy5" Margin="0,15,0,0"  Height="70" Padding="0" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Menu_Button_1_Copy5_Click_1" BorderBrush="{x:Null}" >
                 <Button.Background>
                     <SolidColorBrush Color="CornflowerBlue" Opacity="0.5"/>
                 </Button.Background>
                 <StackPanel Orientation="Horizontal" Height="80" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Rectangle Fill="#FF5078B4" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Width="10" Visibility="Hidden" Margin="0,0,30,0"/>
                     <materialDesign:PackIcon Kind="Account"  Margin="0,12,15,18" Height="20" HorizontalAlignment="Right" Width="20" VerticalAlignment="Center"/>
-                    <TextBlock Text="数据监控"  FontFamily="楷体" FontWeight="Bold" Margin="20,12,0,16" FontSize="18" VerticalAlignment="Center" />
+                    <TextBlock Text="退出面板"  FontFamily="楷体" FontWeight="Bold" Margin="20,12,0,16" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
         </StackPanel>

@@ -13,9 +13,9 @@ namespace Pack.BLL
     {
         public void AppEnable(object sender, CQAppEnableEventArgs e)
         {
+            Init init = new Init();
             GeneralControl.CQApi = e.CQApi;
             GeneralControl.CQLog = e.CQLog;
-            Init init = new Init();
         }
     }
 }

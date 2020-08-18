@@ -17,8 +17,17 @@ namespace Pack.BLL
     {
         public Init()
         {
-            string ip = "127.0.0.1";
-            int port = 8888;
+            string path = System.IO.Directory.GetCurrentDirectory() + "\\app\\仙战";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(path + "\\技能卡");
+                Directory.CreateDirectory(path + "\\游戏配置");
+                Directory.CreateDirectory(path + "\\奇遇");
+            }
+            string ip = "125.124.33.57";
+            //string ip = "127.0.0.1";
+            int port = 20000;
             //创建套接字
             Socket_Client s = new Socket_Client(ip, port);
             //连接服务器
@@ -28,16 +37,6 @@ namespace Pack.BLL
             recv.Start();
 
             GeneralControl.socket = s;
-            string path = GeneralControl.directory;
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-                Directory.CreateDirectory(path + "\\玩家数据");
-                Directory.CreateDirectory(path + "\\技能卡");
-                Directory.CreateDirectory(path + "\\游戏配置");
-                Directory.CreateDirectory(path + "\\奇遇");
-                Directory.CreateDirectory(path + "\\游戏数据");
-            }
             Skill_Cards_Load();
             Adventures_Load();
         }
