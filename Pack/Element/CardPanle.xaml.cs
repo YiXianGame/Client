@@ -66,7 +66,7 @@ namespace Pack.Element
         private void Fitler()
         {
             Filter_Skill.Name = Template_Skill_Name.Text;
-            IEnumerable<SkillCardsModel> array = Make.MODEL.Filter.SkillCardsModel(Make.MODEL.GeneralControl.Skill_Cards, Rate.Value - 1, Filter_Skill);
+            IEnumerable<SkillCardsModel> array = Make.MODEL.Filter.SkillCardsModel((from Custom_Card_SkillCard item in CardsPanel.Children select item.SkillCardsModel), Rate.Value - 1, Filter_Skill);
             foreach (Custom_Card_SkillCard item in CardsPanel.Children)
             {  
                 if (array!=null && array.Where<SkillCardsModel>(x => item.SkillCardsModel == x).Count() != 0)
@@ -143,17 +143,6 @@ namespace Pack.Element
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            (from Custom_Card_SkillCard item in CardsPanel.Children where item.SkillCardsModel.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_SkillCard item)
-            {
-                item.SkillCardsModel.Delete();
-                GeneralControl.Skill_Cards.Remove(item.SkillCardsModel);
-                foreach (SkillCard obj in item.SkillCardsModel.SkillCards)
-                {
-                    GeneralControl.Skill_Card_Dictionary.Remove(obj.Name);
-                }
-                GeneralControl.Skill_Card_Date = DateTime.Now;
-                CardsPanel.Children.Remove(item);
-            });
             XY.Send_To_Server("获取技能卡#" + GeneralControl.Skill_Card_Date);
         }
     }

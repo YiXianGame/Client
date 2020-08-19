@@ -73,12 +73,28 @@ namespace Pack.BLL
                         }
                     });
                 }
-                else if (data.Length == 2 && data[0] == "更新卡牌版本")
+                else if (data.Length == 2 && data[0] == "开始更新卡牌版本")
                 {
+                    GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
+                    {
+                        (from Custom_Card_SkillCard item in GeneralControl.MainMenu.CardPanle.CardsPanel.Children where item.SkillCardsModel.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_SkillCard item)
+                        {
+                            item.SkillCardsModel.Delete();
+                            GeneralControl.MainMenu.CardPanle.CardsPanel.Children.Remove(item);
+                        });
+                    });
                     GeneralControl.Skill_Card_Date = DateTime.Parse(data[1]);
                 }
-                else if (data.Length == 2 && data[0] == "更新奇遇版本")
+                else if (data.Length == 2 && data[0] == "开始更新奇遇版本")
                 {
+                    GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
+                    {
+                        (from Custom_Card_Adventure item in GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children where item.AdventureCard.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_Adventure item)
+                        {
+                            item.AdventureCard.Delete();
+                            GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children.Remove(item);
+                        });
+                    });
                     GeneralControl.Adventure_Date = DateTime.Parse(data[1]);
                 }
                 else if(data.Length==2 && data[0] == "获取技能卡")
@@ -86,34 +102,42 @@ namespace Pack.BLL
                     List<SkillCardsModel> skillCardsModels = JsonConvert.DeserializeObject<List<SkillCardsModel>>(data[1]);
                     GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
                     {
-                        skillCardsModels.ForEach(delegate (SkillCardsModel item) { GeneralControl.MainMenu.CardPanle.Add_Card(item);});
+                        skillCardsModels.ForEach(delegate (SkillCardsModel item) 
+                        {                            
+                            Custom_Card_SkillCard skillCardsModel;
+                            skillCardsModel = (from Custom_Card_SkillCard gene_skill in GeneralControl.MainMenu.CardPanle.CardsPanel.Children where gene_skill.SkillCardsModel.ID == item.ID select gene_skill).FirstOrDefault();
+                            if (skillCardsModel!=null)
+                            {
+                                foreach (SkillCard obj in skillCardsModel.SkillCardsModel.SkillCards)
+                                {
+                                    GeneralControl.Skill_Card_Dictionary.Remove(obj.Name);
+                                }
+                                GeneralControl.Skill_Cards.Remove(skillCardsModel.SkillCardsModel);
+                                GeneralControl.MainMenu.CardPanle.CardsPanel.Children.Remove(skillCardsModel);
+                            }
+                            GeneralControl.MainMenu.CardPanle.Add_Card(item);
+                            item.Save();
+                        });
                     });                   
                 }
                 else if (data.Length == 2 && data[0] == "获取奇遇")
                 {
-                    GeneralControl.Adventures.ForEach((Action<Adventure>)delegate (Adventure item) { item.Cloud = "非云端"; });
                     List<Adventure> Adventures = JsonConvert.DeserializeObject<List<Adventure>>(data[1]);
-                    foreach (Adventure item in Adventures)
+                    GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
                     {
-                        item.Cloud = "云端";
-                        GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
+                        Adventures.ForEach(delegate (Adventure item)
                         {
-                            IEnumerable<Custom_Card_Adventure> ienum = from Custom_Card_Adventure ienum_item in GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children where item.ID == ienum_item.AdventureCard.ID select ienum_item;
-                            if (ienum.Any())
+                            Custom_Card_Adventure adventure;
+                            adventure = (from Custom_Card_Adventure gene_skill in GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children where gene_skill.AdventureCard.ID == item.ID select gene_skill).FirstOrDefault();
+                            if (adventure != null)
                             {
-                                Custom_Card_Adventure adventure = ienum.First();
                                 GeneralControl.Adventures.Remove(adventure.AdventureCard);
-                                adventure.AdventureCard = item;
-                                item.Save();
+                                GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children.Remove(adventure);
                             }
-                            else
-                            {
-                                GeneralControl.MainMenu.AdventurePanle.Add_Adventure(item);
-                                item.Add_To_General();
-                                item.Save();
-                            }
+                            GeneralControl.MainMenu.AdventurePanle.Add_Adventure(item);
+                            item.Save();
                         });
-                    }
+                    });
                 }
             }
         }

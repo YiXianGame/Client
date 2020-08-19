@@ -30,7 +30,6 @@ namespace Pack.Element
             Custom_Card_Adventure.AdventureCard = adventureCard.AdventureCard;
             Custom_Card_Adventure.DataContext = adventureCard.AdventureCard;
             Visibility = Visibility.Visible;
-            Custom_Card_Adventure.State.IsEnabled = false;
         }
 
 
@@ -57,7 +56,7 @@ namespace Pack.Element
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Origin_Custom_Card.AdventureCard.Save();
-            Custom_Card_Adventure.State.IsEnabled = false;
+            
             GeneralControl.Adventure_Date = DateTime.Now;
             this.Visibility = Visibility.Hidden;
         }
@@ -76,8 +75,8 @@ namespace Pack.Element
             GeneralControl.Adventure_Date = DateTime.Now;
             DependencyObject ptr = sender as DependencyObject;
             while (!(ptr is AdventurePanle)) ptr = VisualTreeHelper.GetParent(ptr);
-            AdventurePanle cardPanle = ptr as AdventurePanle;
-            cardPanle.AdventurePanel.Children.Remove(Origin_Custom_Card);
+            AdventurePanle adventurePanle = ptr as AdventurePanle;
+            adventurePanle.AdventurePanel.Children.Remove(Origin_Custom_Card);
             GeneralControl.Adventures.Remove(Origin_Custom_Card.AdventureCard);
             Origin_Custom_Card.AdventureCard.Delete();
         }

@@ -27,7 +27,7 @@ namespace Pack.BLL
             }
             string ip = "125.124.33.57";
             //string ip = "127.0.0.1";
-            int port = 20000;
+            int port = 28015;
             //创建套接字
             Socket_Client s = new Socket_Client(ip, port);
             //连接服务器
@@ -53,7 +53,7 @@ namespace Pack.BLL
             {
                 string json = File.ReadAllText(file.FullName);
                 SkillCardsModel skillCardsModel = JsonConvert.DeserializeObject<SkillCardsModel>(json);
-                skillCardsModel.Add_To_General();
+                if(skillCardsModel.Cloud=="非云端")skillCardsModel.Add_To_General();
             }
         }
         public void Adventures_Load()
@@ -64,7 +64,7 @@ namespace Pack.BLL
             {
                 string json = File.ReadAllText(file.FullName);
                 Adventure adventure = JsonConvert.DeserializeObject<Adventure>(json);
-                adventure.Add_To_General();
+                if (adventure.Cloud == "非云端") adventure.Add_To_General();
             }
         }
     }

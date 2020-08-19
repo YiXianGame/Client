@@ -65,13 +65,12 @@ namespace Make.MODEL
         }
         public void Add_To_General()
         {
-
             foreach (SkillCard skill in skillCards)
             {
                 while ((from SkillCard item in GeneralControl.Skill_Card_Dictionary.Values where item.Name == skill.Name select item).Any()) skill.Name = skill.Name + "-副本";
-                GeneralControl.Skill_Card_Dictionary.Add(skill.Name,skill);
+                GeneralControl.Skill_Card_Dictionary.Add(skill.Name, skill);
             }
-            GeneralControl.Skill_Cards.Add(this);     
+            GeneralControl.Skill_Cards.Add(this);
         }
     }
 }

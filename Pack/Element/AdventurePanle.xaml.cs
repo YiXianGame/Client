@@ -32,6 +32,7 @@ namespace Pack.Element
         {
             InitializeComponent();
             Filter_Bar.DataContext = Filter_Adventure;
+            Filter_Adventure.State = -1;
             Author.DataContext = new Make.MODEL.Author();
         }
         public Custom_Card_Adventure Add_Adventure(Adventure adventure)

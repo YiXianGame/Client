@@ -32,13 +32,13 @@ namespace Make.MODEL
         public static Pack.MainWindow MainMenu;
 
         /// <summary>
-        /// 技能卡MODEL
+        /// 本地技能卡MODEL
         /// </summary>
         public static List<SkillCardsModel> Skill_Cards = new  List<SkillCardsModel>();//总技能卡 //总引用,但UI层还有一层引用，删掉的同时记得删掉UI层
         /// <summary>
         /// 总技能卡
         /// </summary>
-        public static Dictionary<string, SkillCard> Skill_Card_Dictionary = new Dictionary<string, SkillCard>(); //总奇遇
+        public static Dictionary<string, SkillCard> Skill_Card_Dictionary = new Dictionary<string, SkillCard>(); 
         /// <summary>
         /// 总奇遇
         /// </summary>

@@ -18,7 +18,7 @@ namespace Make.MODEL
         private string name = "";//奇遇名
         private int mp;//对这个玩家造成的MP
         private int hp;//对这个玩家造成的HP
-        private int state=-1;//奇遇状态（是否可用）
+        private int state=0;//奇遇状态（是否可用）
         private List<State> effect_States=new  List<State>();//奇遇所自带的状态效果
         private string messages="";//自带信息
         private int probability;//概率
@@ -33,6 +33,10 @@ namespace Make.MODEL
             get => name;
             set
             {
+                if (GeneralControl.Adventures.Contains(this))
+                {
+                    while ((from Adventure item in GeneralControl.Adventures where item.Name == value && item.Name!=Name select item).Any()) value += "-副本";
+                }
                 name = value;
             }
         }
@@ -48,7 +52,6 @@ namespace Make.MODEL
             set
             {
                 state = value;
-                Save();
             }
         }
         public string Description { get => description; set => description = value; }

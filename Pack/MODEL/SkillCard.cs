@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace Make.MODEL
 {
@@ -49,16 +50,9 @@ namespace Make.MODEL
             {
                 if (GeneralControl.Skill_Card_Dictionary.ContainsKey(name) && GeneralControl.Skill_Card_Dictionary.ContainsValue(this))
                 {
-                    if (GeneralControl.Skill_Card_Dictionary.ContainsKey(value))
-                    {
-                        Name = value + "-副本";
-                        return;
-                    }
-                    else
-                    {
-                        GeneralControl.Skill_Card_Dictionary.Remove(name);
-                        GeneralControl.Skill_Card_Dictionary.Add(value, this);
-                    }
+                    while ((from SkillCard item in GeneralControl.Skill_Card_Dictionary.Values where item.Name == value && item.Name != Name select item).Any()) value += "-副本";
+                    GeneralControl.Skill_Card_Dictionary.Remove(name);
+                    GeneralControl.Skill_Card_Dictionary.Add(value, this);
                 }
                 name = value;
             }
@@ -96,6 +90,49 @@ namespace Make.MODEL
             }
             while (File.Exists(GeneralControl.directory + "\\技能卡\\" + temp_id + ".json"));
             ID = temp_id;
+        }
+        public void Assign(SkillCard skillCard)
+        {
+            foreach (PropertyInfo sP in skillCard.GetType().GetProperties())
+            {
+                foreach (PropertyInfo dP in GetType().GetProperties())
+                {
+                    if (dP.Name == sP.Name)
+                    {
+                        dP.SetValue(this, sP.GetValue(skillCard));
+                    }
+                }
+            }
+            /*
+            Attack = skillCard.Attack;
+            level = skillCard.Level; ;//技能卡等级
+            father_ID = skillCard.Father_ID;//父卡类
+            description = skillCard.Description;//技能介绍
+            need_Mp = skillCard.Need_Mp;//所需能量
+            probability = skillCard.Probability;//概率
+            attack = skillCard.Attack;//攻击力
+            cure = skillCard.Cure;//治疗量
+            self_Mp = skillCard.Self_Mp;//自我能量
+            direct_Mp = skillCard.Direct_Mp;//指向能量
+            effect_States = new List<State>();//状态
+            foreach(State item in skillCard.Effect_States)
+            {
+                effect_States.Add(item.Clone());
+            }
+            directs = new List<Player>(skillCard.Directs.ToArray());
+            owner = skillCard.owner;
+            is_Magic = skillCard.Is_Magic;//是否魔法
+            is_Physics = skillCard.Is_Physics;//是否物理
+            is_Self = skillCard.Is_Self;//是否释放于自己
+            is_Cure = skillCard.Is_Cure;//是否治疗
+            is_Attack = skillCard.Is_Attack;//是否攻击
+            is_Eternal = skillCard.Is_Eternal;//是否永恒
+            state = skillCard.State;//技能卡状态
+            messages = skillCard.Messages;//技能反馈
+            amount = skillCard.Amount;//技能卡数量
+            date_Latest = skillCard.Date_Latest;
+            attack_Number = skillCard.Attack_Number;
+            */
         }
     }
 }

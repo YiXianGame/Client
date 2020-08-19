@@ -29,6 +29,7 @@ namespace Pack.Element
             Origin_Custom_Card = custom_Card;
             Custom_Card.SkillCardsModel = custom_Card.SkillCardsModel;
             Custom_Card.DataContext = custom_Card.SkillCardsModel.SkillCards[0];
+            Custom_Card.Rate.Value = 1;
             Visibility = Visibility.Visible;
         }
 
@@ -41,6 +42,7 @@ namespace Pack.Element
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             States_Select.Visibility = Visibility.Visible;
+
         }
 
 
@@ -54,7 +56,7 @@ namespace Pack.Element
                 item.Date_Latest = dateTime;
             }
             GeneralControl.Skill_Card_Date = dateTime;
-            Custom_Card.State.IsEnabled = false;
+            
             Origin_Custom_Card.SkillCardsModel.Save();
         }
 

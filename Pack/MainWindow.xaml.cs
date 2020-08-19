@@ -75,13 +75,21 @@ namespace Pack
         private void UI_Init()
         {
             //初始化技能面板
-            foreach (SkillCardsModel skillCardsModel in GeneralControl.Skill_Cards)
+            string filepath = GeneralControl.directory + "\\技能卡";
+            DirectoryInfo root = new DirectoryInfo(filepath);
+            foreach (FileInfo file in root.GetFiles())
             {
+                string json = File.ReadAllText(file.FullName);
+                SkillCardsModel skillCardsModel = JsonConvert.DeserializeObject<SkillCardsModel>(json);
                 CardPanle.Add_Card(skillCardsModel);
             }
             //初始化奇遇
-            foreach (Adventure adventure in Make.MODEL.GeneralControl.Adventures)
+            filepath = GeneralControl.directory + "\\奇遇";
+            root = new DirectoryInfo(filepath);
+            foreach (FileInfo file in root.GetFiles())
             {
+                string json = File.ReadAllText(file.FullName);
+                Adventure adventure = JsonConvert.DeserializeObject<Adventure>(json);
                 AdventurePanle.Add_Adventure(adventure);
             }
         }

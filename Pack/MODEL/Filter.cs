@@ -16,7 +16,7 @@ namespace Make.MODEL
         /// <param name="value">技能卡的等级</param>
         /// <param name="BluePrint">蓝本</param>
         /// <returns></returns>
-        public static IEnumerable<SkillCardsModel> SkillCardsModel(List<SkillCardsModel> query, int value,SkillCard BluePrint)
+        public static IEnumerable<SkillCardsModel> SkillCardsModel(IEnumerable<SkillCardsModel> query, int value,SkillCard BluePrint)
         {
             IEnumerable<SkillCardsModel> result = from SkillCardsModel item in query select item;
             if (BluePrint.Is_Magic)
@@ -69,7 +69,7 @@ namespace Make.MODEL
         /// <param name="query">被筛选的奇遇</param>
         /// <param name="BluePrint">蓝本</param>
         /// <returns></returns>
-        public static IEnumerable<Adventure> Adventure(List<Adventure> query, Adventure BluePrint)
+        public static IEnumerable<Adventure> Adventure(IEnumerable<Adventure> query, Adventure BluePrint)
         {
             IEnumerable<Adventure> result = from Adventure item in query select item;
             if (BluePrint.Name != "" && result != null)
@@ -91,7 +91,7 @@ namespace Make.MODEL
         /// </summary>
         /// <param name="query">被筛选的卡</param>
         /// <returns></returns>
-        public static IEnumerable<SkillCardsModel> Basic_SkillCardsModel(List<SkillCardsModel> query)
+        public static IEnumerable<SkillCardsModel> Basic_SkillCardsModel(IEnumerable<SkillCardsModel> query)
         {
             List<SkillCardsModel> result= new List<SkillCardsModel>();
             foreach(SkillCardsModel item in from SkillCardsModel item in query select item)
