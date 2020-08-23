@@ -102,7 +102,7 @@
 			"id": 1003,
 			"type": 1003,
 			"name": "应用已被启用",
-			"priority": 30000,
+			"priority": 30000,	
 			"function": "_eventEnable"
 		},
 		{

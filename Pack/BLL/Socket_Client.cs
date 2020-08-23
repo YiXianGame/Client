@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -44,6 +45,10 @@ namespace Pack.BLL
         /// </summary>
         public void Connect_Server()
         {
+            if (client_socket!=null && client_socket.Connected)
+            {
+                client_socket.Close();
+            }
             client_socket = Create_Client_Socket();
             //tcp连接服务器的时候只需要连接一次，因为tcp是长链接
             client_socket.Connect(new IPEndPoint(iPAddress, port));
@@ -84,6 +89,10 @@ namespace Pack.BLL
                                         {
                                             XY.Send_To_CQ_XML(cq_msg[3], long.Parse(cq_msg[1]), long.Parse(cq_msg[2]));
                                         }
+                                        else if (cq_msg[0] == "JSON")
+                                        {
+                                            XY.Send_To_CQ_JSON(cq_msg[3], long.Parse(cq_msg[1]), long.Parse(cq_msg[2]));
+                                        }
                                     }
                                 }
                             }
@@ -92,8 +101,24 @@ namespace Pack.BLL
                 }
                 catch (Exception)
                 {
-                    Debug.WriteLine("离线");
-                    //**离线操作
+                    Console.WriteLine("正在尝试重连");
+                    int cnt = 0;
+                    while (true)
+                    {
+                        Console.WriteLine("第" + ++cnt + "次尝试");
+                        try { Connect_Server(); }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("连接失败，5秒后重新尝试");
+                            Thread.Sleep(5000);
+                            continue;
+                        }
+                        if (client_socket.Connected)
+                        {
+                            Console.WriteLine("连接成功！");
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -102,15 +127,34 @@ namespace Pack.BLL
         /// </summary>
         public void Request_Client(string send_msg)
         {
+            byte[] by_msg=null;
             try
             {
-                byte[] by_msg = Encoding.UTF8.GetBytes(send_msg+"&");
+                by_msg = Encoding.UTF8.GetBytes(send_msg+"&");
                 client_socket.Send(by_msg);
             }
             catch (Exception)
             {
-                Console.WriteLine("代号为：{0}的服务端已经断开！");
-                //**离线操作
+                Console.WriteLine("正在尝试重连");
+                int cnt = 0;
+                while (true)
+                {
+                    Console.WriteLine("第" + ++cnt + "次尝试");
+                    try { Connect_Server(); }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("连接失败，5秒后重新尝试");
+                        Thread.Sleep(5000);
+                        continue;
+                    }
+                    if (client_socket.Connected)
+                    {
+                        Console.WriteLine("连接成功！");
+                        client_socket.Send(by_msg);
+                        Console.WriteLine("成功发送上次失败的消息！");
+                        break;
+                    }
+                }
             }
         }
     }

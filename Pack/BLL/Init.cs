@@ -17,7 +17,7 @@ namespace Pack.BLL
     {
         public Init()
         {
-            string path = System.IO.Directory.GetCurrentDirectory() + "\\app\\仙战";
+            string path = System.IO.Directory.GetCurrentDirectory() + "\\仙战";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);

@@ -32,7 +32,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\..\QQ文件\839336369\FileRecv\MiraiOK-console0.5.2-core1.1.3-Native1.8.1-Windows-i386\plugins\MiraiNative\plugins\</OutputPath>
+    <OutputPath>C:\Users\潇仙槿墨丶\Desktop\mirai-core1.2.2-console1.0_M2_1\data\MiraiNative\plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>

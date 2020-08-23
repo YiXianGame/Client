@@ -126,6 +126,7 @@ namespace Pack.Element
             Custom_Card.DataContext = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1];
             Origin_Custom_Card.DataContext = skillCard;
             Origin_Custom_Card.DataContext = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1];
+            Origin_Custom_Card.Rate.Value = Custom_Card.Rate.Value;
             States_Select.Visibility = Visibility.Hidden;
         }
 

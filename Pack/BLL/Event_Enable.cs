@@ -13,16 +13,9 @@ namespace Pack.BLL
     {
         public void AppEnable(object sender, CQAppEnableEventArgs e)
         {
-            try
-            {
                 Init init = new Init();
                 GeneralControl.CQApi = e.CQApi;
                 GeneralControl.CQLog = e.CQLog;
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine(err.Message);
-            }
         }
     }
 }

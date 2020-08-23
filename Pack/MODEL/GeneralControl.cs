@@ -23,7 +23,7 @@ namespace Make.MODEL
         public static int MaxLevel=5;   //技能卡的最大等级
         public static int MaxStates = 9; //当前状态的最大量
         public static bool LazyLoad_SkillCards = false; //是否惰性加载UI卡片
-        public static string directory = System.IO.Directory.GetCurrentDirectory() + "\\app\\仙战";
+        public static string directory = System.IO.Directory.GetCurrentDirectory() + "\\仙战";
         private static DateTime skill_Card_Date;//技能卡版本
         private static DateTime adventure_Date;//奇遇版本
         public static Socket_Client socket;
@@ -99,17 +99,24 @@ namespace Make.MODEL
         }
         static GeneralControl()
         {
-            if (File.Exists(GeneralControl.directory + @"\游戏配置\GeneralControl.ini"))
+            try
             {
-                MaxLevel = int.Parse(Read("游戏配置", "MaxLevel", "5", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
-                MaxStates = int.Parse(Read("游戏配置", "MaxStates", "9", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
-                LazyLoad_SkillCards = bool.Parse(Read("游戏配置", "LazyLoad_SkillCards", "9", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
-                Skill_Card_Date = DateTime.Parse(Read("游戏配置", "Skill_Card_Date", "", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
-                Adventure_Date = DateTime.Parse(Read("游戏配置", "Adventure_Date", "", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
+                if (File.Exists(GeneralControl.directory + @"\游戏配置\GeneralControl.ini"))
+                {
+                    MaxLevel = int.Parse(Read("游戏配置", "MaxLevel", "5", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
+                    MaxStates = int.Parse(Read("游戏配置", "MaxStates", "9", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
+                    LazyLoad_SkillCards = bool.Parse(Read("游戏配置", "LazyLoad_SkillCards", "9", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
+                    Skill_Card_Date = DateTime.Parse(Read("游戏配置", "Skill_Card_Date", "", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
+                    Adventure_Date = DateTime.Parse(Read("游戏配置", "Adventure_Date", "", GeneralControl.directory + @"\游戏配置\GeneralControl.ini"));
+                }
+                else
+                {
+                    Save();
+                }
             }
-            else
+            catch(Exception e)
             {
-                Save();
+                Console.Write(e.Message);
             }
         }
         public static void Save()

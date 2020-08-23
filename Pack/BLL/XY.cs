@@ -43,7 +43,18 @@ namespace Pack.BLL
             }
             else
             {
-                GeneralControl.CQApi.SendPrivateMessage(frompersonal, "[CQ:xml,data=" + escape(msg) + "]");
+                GeneralControl.CQApi.SendGroupMessage(fromgroup, "[CQ:xml,data=" + escape(msg) + "]");
+            }
+        }
+        public static void Send_To_CQ_JSON(string msg, long frompersonal, long fromgroup = -1)
+        {
+            if (fromgroup == -1)
+            {
+                GeneralControl.CQApi.SendPrivateMessage(frompersonal, "[CQ:app,data=" + escape(msg) + "]");
+            }
+            else
+            {
+                GeneralControl.CQApi.SendGroupMessage(fromgroup, "[CQ:app,data=" + escape(msg) + "]");
             }
         }
         private static string escape(string msg)
