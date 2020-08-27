@@ -252,7 +252,7 @@
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="10,1" Foreground="blue" FontFamily="楷体"  Grid.Row="1" FontSize="14" Width="50" PreviewTextInput="TextBox_PreviewTextInput" TextAlignment="Center"/>
                                     <TextBox x:Name="state_round" 
                                                materialDesign:HintAssist.Hint="作用力度"
-                                              Text="{Binding Duration_Round, Mode=TwoWay}"
+                                              Text="{Binding Effect_mp, Mode=TwoWay}"
                                              InputMethod.IsInputMethodEnabled="False"         
                                              ToolTip="{Binding Effect_Information}"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="10,1" Foreground="blue" FontFamily="楷体"  Grid.Row="1" FontSize="14" Width="50" PreviewTextInput="TextBox_PreviewTextInput" TextAlignment="Center"/>

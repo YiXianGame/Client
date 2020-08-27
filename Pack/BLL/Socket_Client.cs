@@ -128,34 +128,8 @@ namespace Pack.BLL
         public void Request_Client(string send_msg)
         {
             byte[] by_msg=null;
-            try
-            {
-                by_msg = Encoding.UTF8.GetBytes(send_msg+"&");
-                client_socket.Send(by_msg);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("正在尝试重连");
-                int cnt = 0;
-                while (true)
-                {
-                    Console.WriteLine("第" + ++cnt + "次尝试");
-                    try { Connect_Server(); }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("连接失败，5秒后重新尝试");
-                        Thread.Sleep(5000);
-                        continue;
-                    }
-                    if (client_socket.Connected)
-                    {
-                        Console.WriteLine("连接成功！");
-                        client_socket.Send(by_msg);
-                        Console.WriteLine("成功发送上次失败的消息！");
-                        break;
-                    }
-                }
-            }
+            by_msg = Encoding.UTF8.GetBytes(send_msg + "&");
+            client_socket.Send(by_msg);
         }
     }
 }
