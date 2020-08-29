@@ -25,8 +25,8 @@ namespace Pack.BLL
                 Directory.CreateDirectory(path + "\\游戏配置");
                 Directory.CreateDirectory(path + "\\奇遇");
             }
-            string ip = "125.124.33.57";
-            //string ip = "127.0.0.1";
+            //string ip = "125.124.33.57";
+            string ip = "127.0.0.1";
             int port = 28015;
             //创建套接字
             Socket_Client s = new Socket_Client(ip, port);
