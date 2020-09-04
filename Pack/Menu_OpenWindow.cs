@@ -19,6 +19,14 @@ namespace Pack
         {
             try
             {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            {
                 if (GeneralControl.MainMenu == null)
                 {
                     thread = new Thread(new ThreadStart(() =>
