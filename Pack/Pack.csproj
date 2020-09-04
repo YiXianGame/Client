@@ -121,7 +121,7 @@
     <Compile Include="BLL\Event_PrivateMessage.cs" />
     <Compile Include="BLL\Init.cs" />
     <Compile Include="BLL\Socket_Client.cs" />
-    <Compile Include="BLL\XY.cs" />
+    <Compile Include="XY.cs" />
     <Compile Include="Element\AdventurePanle.xaml.cs">
       <DependentUpon>AdventurePanle.xaml</DependentUpon>
     </Compile>

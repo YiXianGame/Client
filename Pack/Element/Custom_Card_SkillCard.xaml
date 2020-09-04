@@ -176,7 +176,7 @@
                 </Grid>
             </Border>
             <Border Grid.Column="1" BorderBrush="{DynamicResource MaterialDesignDivider}" Grid.RowSpan="3" >
-                <WrapPanel  Height="250" VerticalAlignment="Top" Width="82" HorizontalAlignment="Right" Margin="0,13,0,0">
+                <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,13,0,0">
                     <TextBlock x:Name="Attack"  Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="Red" Text="{Binding Attack}" Width="30"  Margin="10,6.5,0,0"/>
                     <TextBlock FontFamily="楷体" FontWeight="Bold" Margin="-5,7"><Run Text="攻击力"/></TextBlock>
 
