@@ -8,7 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=mscorlib"    
              xmlns:Main="clr-namespace:Pack"
-             mc:Ignorable="d" Width="312" Height="225" Margin="5">
+             mc:Ignorable="d" Width="312" Height="250" Margin="5">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -41,22 +41,27 @@
             <SolidColorBrush x:Key="MahApps.Metro.Brushes.ToggleSwitchButton.ThumbIndicatorCheckedBrush.Win10" Color="{DynamicResource Primary500Foreground}" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <materialDesign:Card  Width="auto" Margin="0"  x:Name="Card" Height="225" VerticalAlignment="Top">
-        <Grid VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0" Margin="0">
-                <Grid>
-                    <TextBlock x:Name="Head" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="40,5,40,103" Text="{Binding Path=Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="楷体" Width="160" TextAlignment="Center"/>
-                    <TextBlock TextWrapping="Wrap" Margin="5,68,5,5" Foreground="{DynamicResource MaterialDesignBody}"
-                        VerticalAlignment="Center" Text="{Binding Path=Description}" Height="62" FontWeight="Bold" FontFamily="楷体" Width="230" FontSize="11"/>
+
+    <Grid>
+        <Border Background="Blue" CornerRadius="5">
+            <Border.Effect>
+                <DropShadowEffect Color="Blue"  BlurRadius="10" ShadowDepth="0" Opacity="0.5" />
+            </Border.Effect>
+        </Border>
+        <Border Background="White" CornerRadius="5">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="0.8*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <TextBlock x:Name="Head" Margin="0,5,0,0"  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="{Binding Path=Name}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="楷体"  TextAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" Margin="10,60,10,0" Foreground="{DynamicResource MaterialDesignBody}" VerticalAlignment="Top" Text="{Binding Path=Description}" FontWeight="Bold" FontFamily="楷体" Height="70" />
                     <ListBox x:Name="List_States" HorizontalAlignment="Left" Height="40" Margin="0,25,0,0" VerticalAlignment="Top" Width="240"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding Path=Effect_States}" IsEnabled="False" SelectedIndex="-1" >
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -119,55 +124,57 @@
                                         </TextBlock>
                                     </ListBoxItem.Content>
                                 </ListBoxItem>
-
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-
                     </ListBox>
-                    <Label Content="{Binding Path=Cloud}" HorizontalAlignment="Left" Height="26" Margin="244,194,-69,-85" VerticalAlignment="Top" Width="65"  FontSize="11" FontWeight="Bold"  Foreground="#DD00AEFF"/>
+                </Grid>
+                <Grid  Grid.Column="0" Grid.Row="1">
+                    <Border  BorderThickness="0 2 0 2" Padding="5">
+                        <ListBox x:Name="State" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignToolToggleListBox}" materialDesign:ListBoxAssist.IsToggle="False"  SelectedIndex="{Binding Path=State, Mode=TwoWay}" IsEnabled="False">
+                            <ListBoxItem>
+                                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"><Run Text="禁用"/></TextBlock>
+                            </ListBoxItem>
+
+                            <ListBoxItem>
+                                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" ><Run Text="开启"/></TextBlock>
+                            </ListBoxItem>
+                        </ListBox>
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="0" Margin="0" >
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                                x:Name="AuthorButton">
+                            <StackPanel Orientation="Horizontal" >
+                                <materialDesign:PackIcon Kind="Account" Width="18" Height="18" />
+                                <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" FontFamily="楷体" FontWeight="Bold" Text="作者"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                x:Name="EditButton"  >
+                            <StackPanel Orientation="Horizontal"  >
+                                <materialDesign:PackIcon Kind="FileDocumentEditOutline" Width="18" Height="18"/>
+                                <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" Text="编辑" FontFamily="楷体" FontWeight="Bold" />
+                            </StackPanel>
+                        </Button>
+                    </WrapPanel>
+                </Grid>
+                <Grid Grid.Column="1"  Grid.Row="0" Grid.RowSpan="3">
+                    <Border BorderBrush="{DynamicResource MaterialDesignDivider}">
+                        <WrapPanel  VerticalAlignment="Top" Width="82" HorizontalAlignment="Right" Margin="-4,4,0,0" Height="246">
+                            <TextBlock x:Name="Hp"  Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="Red" Text="{Binding Hp}" Width="30"  Margin="10,40,0,0"/>
+                            <TextBlock FontFamily="楷体" FontWeight="Bold" Margin="-5,40,-5,7"><Run Text="伤害值"/></TextBlock>
+
+                            <TextBlock x:Name="Mp" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"  FontFamily="楷体" FontWeight="Bold"  Foreground="Blue" Text="{Binding Mp}" Width="30" Margin="10,40,0,0"/>
+                            <TextBlock FontFamily="楷体" FontWeight="Bold"  HorizontalAlignment="Left" Margin="-5,40,-5,7"><Run Text="仙气值"/></TextBlock>
+
+                            <TextBlock x:Name="Probability" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="DarkTurquoise" Text="{Binding Probability}" Width="30" Margin="10,40,0,0"/>
+                            <TextBlock FontFamily="楷体" FontWeight="Bold" HorizontalAlignment="Left" Margin="-5,40,-5,7"><Run Text="随机率"/></TextBlock>
+                            <Label x:Name="Cloud" FontFamily="楷体" Foreground="SkyBlue" FontWeight="Bold"  Content="非云端" Width="65" FontSize="18" Margin="10,30,0,5"/>
+                        </WrapPanel>
+                    </Border>
                 </Grid>
             </Grid>
-            <Border Grid.Column="0" Grid.Row="1"  BorderThickness="0 2 0 2"  Margin="0">
-                <ListBox x:Name="State"  Style="{StaticResource MaterialDesignToolToggleListBox}" materialDesign:ListBoxAssist.IsToggle="False" Height="37" SelectedIndex="{Binding Path=State, Mode=TwoWay}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False">
-                    <ListBoxItem>
-                        <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"><Run Text="禁用"/></TextBlock>
-                    </ListBoxItem>
-
-                    <ListBoxItem>
-                        <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" ><Run Text="开启"/></TextBlock>
-                    </ListBoxItem>
-                </ListBox>
-            </Border>
-            <Border Grid.Row="2" Grid.Column="0"  BorderThickness="0 0 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Margin="0">
-                <Grid Margin="0">
-                    <Button Style="{DynamicResource MaterialDesignFlatButton}"
-                                x:Name="AuthorButton" Margin="20,2,130,-2" Width="90" Height="30" >
-                        <StackPanel Orientation="Horizontal" >
-                            <materialDesign:PackIcon Kind="Account" Width="18" Height="18" />
-                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" FontFamily="楷体" FontWeight="Bold" Text="作者"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{DynamicResource MaterialDesignFlatButton}"
-                                x:Name="EditButton"  Margin="116,2,34,-2" Width="90" Height="30">
-                        <StackPanel Orientation="Horizontal" Margin="0" >
-                            <materialDesign:PackIcon Kind="FileDocumentEditOutline" Width="18" Height="18"/>
-                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" Text="编辑" FontFamily="楷体" FontWeight="Bold" />
-                        </StackPanel>
-                    </Button>
-                </Grid>
-            </Border>
-            <Border Grid.Column="1" BorderBrush="{DynamicResource MaterialDesignDivider}" Grid.RowSpan="3" >
-                <WrapPanel  Height="207" VerticalAlignment="Top" Width="82" HorizontalAlignment="Right" Margin="0,4,0,-3">
-                    <TextBlock x:Name="Hp"  Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="Red" Text="{Binding Hp}" Width="30"  Margin="10,40,0,0"/>
-                    <TextBlock FontFamily="楷体" FontWeight="Bold" Margin="-5,40,-5,7"><Run Text="伤害值"/></TextBlock>
-
-                    <TextBlock x:Name="Mp" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"  FontFamily="楷体" FontWeight="Bold"  Foreground="Blue" Text="{Binding Mp}" Width="30" Margin="10,40,0,0"/>
-                    <TextBlock FontFamily="楷体" FontWeight="Bold"  HorizontalAlignment="Left" Margin="-5,40,-5,7"><Run Text="仙气值"/></TextBlock>
-
-                    <TextBlock x:Name="Probability" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="DarkTurquoise" Text="{Binding Probability}" Width="30" Margin="10,40,0,0"/>
-                    <TextBlock FontFamily="楷体" FontWeight="Bold" HorizontalAlignment="Left" Margin="-5,40,-5,7"><Run Text="随机率"/></TextBlock>
-                </WrapPanel>
-            </Border>
-        </Grid>
-    </materialDesign:Card>
+        </Border>
+    </Grid>
 </UserControl>

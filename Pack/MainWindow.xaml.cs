@@ -31,7 +31,7 @@ namespace Pack
 
         public MainWindow()
         {
-            //BLL.Init init = new Init(); //测试单机的时候用
+            if (GeneralControl.Debug) { Init init = new Init(); GeneralControl.MainMenu = this; } //测试单机的时候用
             InitializeComponent();
             Init();
         }
@@ -44,8 +44,8 @@ namespace Pack
             Menu_Person_Informations.DataContext = GeneralControl.Menu_Person_Informations_Class.Instance;
             Menu_Version_Informations.DataContext = GeneralControl.Menu_Version_Informations_Class.Instance;
             Menu_Skill_Cards.DataContext = GeneralControl.Menu_Skill_Cards_Class.Instance;
-            XY.Send_To_Server("用户#" + GeneralControl.CQApi.GetLoginQQ());
-            //XY.Send_To_Server("用户#" + 3028394801);
+            if(GeneralControl.Debug) XY.Send_To_Server("用户#" + 3028394801);
+            else XY.Send_To_Server("用户#" + GeneralControl.CQApi.GetLoginQQ());
         }
 
         private void SkillCardsPanle_Initialized(object sender, EventArgs e)
@@ -121,8 +121,8 @@ namespace Pack
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            XY.Send_To_Server("用户#" + GeneralControl.CQApi.GetLoginQQ());
-           // XY.Send_To_Server("用户#" + 3028394801);
+            if(GeneralControl.Debug) XY.Send_To_Server("用户#" + 3028394801);
+            else XY.Send_To_Server("用户#" + GeneralControl.CQApi.GetLoginQQ());
         }
 
         private void Menu_Button_1_Copy5_Click_1(object sender, RoutedEventArgs e)

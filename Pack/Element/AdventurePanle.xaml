@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pack.Element"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" RenderTransformOrigin="0,0" d:DesignWidth="735" d:DesignHeight="370"
+             mc:Ignorable="d" RenderTransformOrigin="0,0" d:DesignWidth="965" d:DesignHeight="460"
              >
     <UserControl.Resources>
         <ResourceDictionary>
@@ -80,6 +80,7 @@
             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
             BorderThickness="0"
             MinWidth="200"
+            MaxWidth="200"
             VerticalAlignment="Center" TextChanged="TextBox_TextChanged" />
                             <Button
             Style="{DynamicResource MaterialDesignToolButton}" Height="Auto" Margin="207,0,0,0" Click="Button_Click">
@@ -94,6 +95,6 @@
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
-        <local:Author x:Name="Author" HorizontalAlignment="Left" Height="440" Margin="250,110,0,0" VerticalAlignment="Top" Width="790" Visibility="Hidden"/>
+        <local:Author x:Name="Author" Margin="90" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden"/>
     </Grid>
 </UserControl>

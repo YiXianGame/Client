@@ -134,5 +134,6 @@ namespace Pack.Element
         {
             XY.Send_To_Server("技能卡上传#" + JsonConvert.SerializeObject(Origin_Custom_Card.SkillCardsModel));
         }
+
     }
 }

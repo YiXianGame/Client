@@ -31,6 +31,7 @@ namespace Pack.Element
             DataContext = adventure;
             AdventureCard = adventure;
             InitializeComponent();
+            Cloud.Content = adventure.Cloud;
         }
         public Custom_Card_Adventure()
         {

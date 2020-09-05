@@ -66,7 +66,8 @@ namespace Pack.BLL
                     byte[] ser_msg = new byte[20480];
                     int count = client_socket.Receive(ser_msg);
                     string origin_msg = Encoding.UTF8.GetString(ser_msg, 0, count);
-                    Console.WriteLine("总计字节:"+ count +" 内容:" + origin_msg);
+                    if (count > 0) Console.WriteLine("总计字节:" + count + " 内容:" + origin_msg);
+                    else throw new Exception("接收字节为0");
                     foreach(string str_msg in origin_msg.Split('&'))
                     {
                         //GeneralControl.CQLog.Debug("服务端", str_msg);
@@ -99,26 +100,30 @@ namespace Pack.BLL
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.WriteLine("正在尝试重连");
-                    int cnt = 0;
-                    while (true)
+                    if (!client_socket.Connected)
                     {
-                        Console.WriteLine("第" + ++cnt + "次尝试");
-                        try { Connect_Server(); }
-                        catch (Exception)
+                        Console.WriteLine("正在尝试重连");
+                        int cnt = 0;
+                        while (true)
                         {
-                            Console.WriteLine("连接失败，5秒后重新尝试");
-                            Thread.Sleep(5000);
-                            continue;
-                        }
-                        if (client_socket.Connected)
-                        {
-                            Console.WriteLine("连接成功！");
-                            break;
+                            Console.WriteLine("第" + ++cnt + "次尝试");
+                            try { Connect_Server(); }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("连接失败，5秒后重新尝试");
+                                Thread.Sleep(5000);
+                                continue;
+                            }
+                            if (client_socket.Connected)
+                            {
+                                Console.WriteLine("连接成功！");
+                                break;
+                            }
                         }
                     }
+                    else Console.WriteLine(e.Message);
                 }
             }
         }
