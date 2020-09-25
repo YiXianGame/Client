@@ -20,7 +20,6 @@ namespace Make.MODEL
         private DateTime latest_Date=DateTime.Now;//房间最新时间
         private int max_Personals;//最大玩家数
         private int min_Personals;//最少玩家数
-        private int current_Personals;//当前玩家数
         private Socket socket;
         public int Round { get => round; set => round = value; }
         public List<Player> Players { get => players; set => players = value; }
@@ -30,9 +29,20 @@ namespace Make.MODEL
         public int Deaths { get => deaths; set => deaths = value; }
         public DateTime Latest_Date { get => latest_Date; set => latest_Date = value; }
         public int Max_Personals { get => max_Personals; set => max_Personals = value; }
-        public int Current_Personals { get => current_Personals; set => current_Personals = value; }
         public int Min_Personals { get => min_Personals; set => min_Personals = value; }
         public Socket Socket { get => socket; set => socket = value; }
-      
+
+        public abstract void Start();
+        public abstract void Action_Stage(Player player, string[] messages);
+        public abstract void Raise_Stage();
+        public abstract void Result_Stage();
+
+        public Room(int max,int min,Socket socket,  long fromGroup = 0)
+        {
+            Max_Personals = max;
+            Min_Personals = min;
+            From_Group = fromGroup;
+            Socket = socket;
+        }
     }
 }

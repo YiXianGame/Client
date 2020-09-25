@@ -34,24 +34,24 @@ namespace Native.App.Export
 		/// 读取容器中的注册项, 进行事件分发	
 		/// </summary>	
 		private static void ResolveBackcall ()	
-		{
+		{	
 			/*	
 			 * Name: 仙域菜单	
 			 * Function: menuOpenWindow	
-			 */
+			 */	
 			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("仙域菜单"))	
 			{	
 				MenumenuOpenWindowHandler += AppData.UnityContainer.Resolve<IMenuCall> ("仙域菜单").MenuCall;	
 			}	
 			
-		}
-		#endregion
-
+		}	
+		#endregion	
+		
 		#region --导出方法--	
 		/*	
 		 * Name: 仙域菜单	
 		 * Function: menuOpenWindow	
-		 */
+		 */	
 		public static event EventHandler<CQMenuCallEventArgs> MenumenuOpenWindowHandler;	
 		[DllExport (ExportName = "menuOpenWindow", CallingConvention = CallingConvention.StdCall)]	
 		public static int MenumenuOpenWindow ()	

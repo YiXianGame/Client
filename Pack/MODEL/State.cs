@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Make.MODEL
 {
-    public  class State
+    public class State
     {
         private string name;//状态名称
-        private long owner;//状态来源
-        private long direct;//状态对象
+        private Player owner;//状态来源
+        private Player direct;//状态对象
         private int duration_Round;//持续回合
         private int expire_Round;//到期回合
         private int duration_Immediate;//持续时长
@@ -88,13 +88,11 @@ namespace Make.MODEL
         public bool Is_Self { get => is_Self; set => is_Self = value; }
         public int Duration_Round { get => duration_Round; set => duration_Round = value; }
         public int Expire_Round { get => expire_Round; set => expire_Round = value; }
-        public string Effect_Information { get => effect_Information; set => effect_Information = value; }
-        public string Message_Information { get => message_Information; set => message_Information = value; }
         public int Duration_Immediate
         {
             get => duration_Immediate;
-            set 
-            { 
+            set
+            {
                 duration_Immediate = value;
                 int round = Duration_Immediate / GeneralControl.Menu_GameControl_Class.Instance.Immediate_To_Round;
                 if (round > 0) Duration_Round = round;
@@ -103,17 +101,20 @@ namespace Make.MODEL
         }
         public DateTime Expire_Immediate { get => expire_Immediate; set => expire_Immediate = value; }
         public int Effect_mp { get => effect_mp; set => effect_mp = value; }
-        public long Owner { get => owner; set => owner = value; }
-        public long Direct { get => direct; set => direct = value; }
-
+        public Player Owner { get => owner; set => owner = value; }
+        public Player Direct { get => direct; set => direct = value; }
+        public string Effect_Information { get => effect_Information; set => effect_Information = value; }
+        public string Message_Information { get => message_Information; set => message_Information = value; }
+        public void Refresh_Immediate(Player player)
+        {
+            if (Expire_Immediate <= DateTime.Now)
+            {
+                player.States.Remove(this);
+            }
+        }
         public State Clone()
         {
             return MemberwiseClone() as State;
-        }
-        public bool Is_Exist(string state_Name, int mp)
-        {
-            if (Name == state_Name && Effect_mp >= mp) return true;
-            return false;
         }
     }
 }

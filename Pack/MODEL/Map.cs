@@ -15,13 +15,10 @@ namespace Make.MODEL
         public int Height { get; set; }
         public int Width { get; set; }
         public int Current_Resources_Monster { get; set; } = 0;
-        public int Current_Players { get; set; } = 0;
         public int Current_Resources_SkillCard { get; set; } = 0;
         public int Current_Resources_State { get; set; } = 0;
         public int Current_Resources_Adventure { get; set; } = 0;
-        public List<Player> players;
-        public abstract void Enter(Player player);
-        public abstract void Leave(Player player);
-        
+        public List<Player> Players = new List<Player>();
+      
     }
 }

@@ -30,19 +30,31 @@ namespace Make.MODEL
         public static CQApi CQApi;
         public static CQLog CQLog;
         public static Pack.MainWindow MainMenu;
-        public static bool Debug = true;
+        public static bool Debug = false;
         /// <summary>
-        /// 本地技能卡MODEL
+        /// 技能卡MODEL
         /// </summary>
-        public static List<SkillCardsModel> Skill_Cards = new  List<SkillCardsModel>();//总技能卡 //总引用,但UI层还有一层引用，删掉的同时记得删掉UI层
+        public static List<SkillCardsModel> Skill_Cards = new List<SkillCardsModel>();//总技能卡 //总引用,但UI层还有一层引用，删掉的同时记得删掉UI层
         /// <summary>
-        /// 总技能卡
+        /// 字典技能卡MODEL
         /// </summary>
-        public static Dictionary<string, SkillCard> Skill_Card_Dictionary = new Dictionary<string, SkillCard>(); 
+        public static Dictionary<string, SkillCardsModel> Skill_Cards_ID = new Dictionary<string, SkillCardsModel>();
+        /// <summary>
+        /// ID技能卡
+        /// </summary>
+        public static Dictionary<string, SkillCard> Skill_Card_ID_Skllcard = new Dictionary<string, SkillCard>();
+        /// <summary>
+        /// 名字技能卡
+        /// </summary>
+        public static Dictionary<string, SkillCard> Skill_Card_Name_Skllcard = new Dictionary<string, SkillCard>();
         /// <summary>
         /// 总奇遇
         /// </summary>
-        public static List<Adventure> Adventures = new  List<Adventure>();//总引用,但UI层还有一层引用，删掉的同时记得删掉UI层
+        public static List<Adventure> Adventures = new List<Adventure>();//总引用,但UI层还有一层引用，删掉的同时记得删掉UI层
+        /// <summary>
+        /// 奇遇字典
+        /// </summary>
+        public static Dictionary<string, Adventure> Adventures_ID = new Dictionary<string, Adventure>();
         /// <summary>
         /// 总状态
         /// </summary>
@@ -179,7 +191,12 @@ namespace Make.MODEL
                 {
                     return JsonConvert.DeserializeObject<Menu_Version_Informations_Class>(File.ReadAllText(GeneralControl.directory + @"\游戏配置\Menu_Version_Informations_Class.json"));
                 }
-                else return new Menu_Version_Informations_Class();
+                else
+                {
+                    Menu_Version_Informations_Class temp = new Menu_Version_Informations_Class();
+                    
+                    return temp;
+                }
             });
 
             public string Expiration_Date { get; set; } = DateTime.Now.ToString();

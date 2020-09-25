@@ -28,16 +28,21 @@ namespace Make.MODEL
         public long Author_ID { get => author_ID; set => author_ID = value; }
         public string ID { get => iD; set => iD = value; }
         private string cloud = "非云端";
+        private int attack_Number = 1;
         public string Name
         { 
             get => name;
             set
             {
-                if (GeneralControl.Adventures.Contains(this))
+                if (!int.TryParse(value, out int result))
                 {
-                    while ((from Adventure item in GeneralControl.Adventures where item.Name == value && item.Name!=Name select item).Any()) value += "-副本";
+                    if (GeneralControl.Adventures.Contains(this))
+                    {
+                        while ((from Adventure item in GeneralControl.Adventures where item.Name == value && item.Name != Name select item).Any()) value += "-副本";
+                    }
+                    name = value;
                 }
-                name = value;
+                else return;
             }
         }
         public int Mp { get => mp; set => mp = value; }
@@ -56,6 +61,7 @@ namespace Make.MODEL
         }
         public string Description { get => description; set => description = value; }
         public string Cloud { get => cloud; set => cloud = value; }
+        public int Attack_Number { get => attack_Number; set => attack_Number = value; }
 
         public void SetName(string adventure_Name)
         {
@@ -81,12 +87,16 @@ namespace Make.MODEL
         public void Delete()
         {
             string filepath = GeneralControl.directory + "\\奇遇\\" + ID + ".json";
+            GeneralControl.Adventures.Remove(this);
+            GeneralControl.Adventures_ID.Remove(ID);
             File.Delete(filepath);
         }
         public void Add_To_General()
         {
-            while ((from Adventure item in GeneralControl.Adventures where item.Name == Name select item).Any()) Name = Name + "-副本";
+            while ((from Adventure item in GeneralControl.Adventures where item.Name == Name select item).Any()) Name += "-副本";
+            while ((from Adventure item in GeneralControl.Adventures where item.ID == ID select item).Any()) ID = Guid.NewGuid().ToString();
             GeneralControl.Adventures.Add(this);
+            GeneralControl.Adventures_ID.Add(ID, this);
         }
     }
 }

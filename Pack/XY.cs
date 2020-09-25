@@ -28,7 +28,7 @@ namespace Pack.BLL
         {
             if (fromgroup == -1)
             {
-                GeneralControl.CQApi.SendPrivateMessage(frompersonal, msg);
+                GeneralControl.CQApi.SendPrivateMessage( frompersonal,  msg);
             }
             else
             {
@@ -59,7 +59,7 @@ namespace Pack.BLL
         }
         private static string escape(string msg)
         {
-            return msg.Replace("&", "&amp;").Replace("[", "&#91;").Replace("]", "&#93;").Replace(",", "&#44;");
+            return msg.Replace("&", "&amp;").Replace("[", "&#91;").Replace("]", "&#93;").Replace(",", "&#44;").Replace("\n", "");
         }
         public static void Client_Recieve_Server(string msg)
         {
@@ -84,6 +84,10 @@ namespace Pack.BLL
                         }
                     });
                 }
+                else if (data.Length == 1 && data[0] == "申请已满")
+                {
+                    MessageBox.Show("抱歉!后台卡片申请数量过多，处于爆满状态，请稍后再试");
+                }
                 else if (data.Length == 2 && data[0] == "开始更新卡牌版本")
                 {
                     GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
@@ -100,9 +104,9 @@ namespace Pack.BLL
                 {
                     GeneralControl.MainMenu.Dispatcher.Invoke((Action)delegate ()
                     {
-                        (from Custom_Card_Adventure item in GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children where item.AdventureCard.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_Adventure item)
+                        (from Custom_Card_Adventure item in GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children where item.Adventure.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_Adventure item)
                         {
-                            item.AdventureCard.Delete();
+                            item.Adventure.Delete();
                             GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children.Remove(item);
                         });
                     });
@@ -119,14 +123,11 @@ namespace Pack.BLL
                             skillCardsModel = (from Custom_Card_SkillCard gene_skill in GeneralControl.MainMenu.CardPanle.CardsPanel.Children where gene_skill.SkillCardsModel.ID == item.ID select gene_skill).FirstOrDefault();
                             if (skillCardsModel!=null)
                             {
-                                foreach (SkillCard obj in skillCardsModel.SkillCardsModel.SkillCards)
-                                {
-                                    GeneralControl.Skill_Card_Dictionary.Remove(obj.Name);
-                                }
-                                GeneralControl.Skill_Cards.Remove(skillCardsModel.SkillCardsModel);
+                                skillCardsModel.SkillCardsModel.Delete();
                                 GeneralControl.MainMenu.CardPanle.CardsPanel.Children.Remove(skillCardsModel);
                             }
                             GeneralControl.MainMenu.CardPanle.Add_Card(item);
+                            item.Add_To_General();
                             item.Save();
                         });
                     });                   
@@ -139,13 +140,14 @@ namespace Pack.BLL
                         Adventures.ForEach(delegate (Adventure item)
                         {
                             Custom_Card_Adventure adventure;
-                            adventure = (from Custom_Card_Adventure gene_skill in GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children where gene_skill.AdventureCard.ID == item.ID select gene_skill).FirstOrDefault();
+                            adventure = (from Custom_Card_Adventure gene_skill in GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children where gene_skill.Adventure.ID == item.ID select gene_skill).FirstOrDefault();
                             if (adventure != null)
                             {
-                                GeneralControl.Adventures.Remove(adventure.AdventureCard);
+                                GeneralControl.Adventures.Remove(adventure.Adventure);
                                 GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children.Remove(adventure);
                             }
                             GeneralControl.MainMenu.AdventurePanle.Add_Adventure(item);
+                            item.Add_To_General();
                             item.Save();
                         });
                     });

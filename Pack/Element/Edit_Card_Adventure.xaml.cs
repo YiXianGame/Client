@@ -27,8 +27,8 @@ namespace Pack.Element
         public void Open_Edit(Custom_Card_Adventure adventureCard)
         {
             Origin_Custom_Card = adventureCard;
-            Custom_Card_Adventure.AdventureCard = adventureCard.AdventureCard;
-            Custom_Card_Adventure.DataContext = adventureCard.AdventureCard;
+            Custom_Card_Adventure.Adventure = adventureCard.Adventure;
+            Custom_Card_Adventure.DataContext = adventureCard.Adventure;
             Visibility = Visibility.Visible;
         }
 
@@ -55,34 +55,27 @@ namespace Pack.Element
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Origin_Custom_Card.AdventureCard.Save();
+            Origin_Custom_Card.Adventure.Save();
             
             GeneralControl.Adventure_Date = DateTime.Now;
             this.Visibility = Visibility.Hidden;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Custom_Card_Adventure.AdventureCard.Effect_States.Remove((State)(((Button)sender).DataContext));
-            Adventure skillCard = new Adventure();
-            Custom_Card_Adventure.DataContext = skillCard;
-            Custom_Card_Adventure.DataContext = Custom_Card_Adventure.AdventureCard;
-            Origin_Custom_Card.DataContext = skillCard;
-            Origin_Custom_Card.DataContext = Custom_Card_Adventure.AdventureCard;
+            Custom_Card_Adventure.Adventure.Effect_States.Remove((State)(((Button)sender).DataContext));    
         }
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Hidden;
             GeneralControl.Adventure_Date = DateTime.Now;
-            DependencyObject ptr = sender as DependencyObject;
-            while (!(ptr is AdventurePanle)) ptr = VisualTreeHelper.GetParent(ptr);
-            AdventurePanle adventurePanle = ptr as AdventurePanle;
-            adventurePanle.AdventurePanel.Children.Remove(Origin_Custom_Card);
-            GeneralControl.Adventures.Remove(Origin_Custom_Card.AdventureCard);
-            Origin_Custom_Card.AdventureCard.Delete();
+            GeneralControl.MainMenu.AdventurePanle.AdventurePanel.Children.Remove(Origin_Custom_Card);
+            GeneralControl.Adventures.Remove(Origin_Custom_Card.Adventure);
+            GeneralControl.Adventures_ID.Remove(Origin_Custom_Card.Adventure.ID);
+            Origin_Custom_Card.Adventure.Delete();
         }
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            if (Custom_Card_Adventure.AdventureCard.Effect_States.Count >= Make.MODEL.GeneralControl.MaxStates)
+            if (Custom_Card_Adventure.Adventure.Effect_States.Count >= Make.MODEL.GeneralControl.MaxStates)
             {
                 MessageBox.Show("状态数量已满");
                 States_Select.Visibility = Visibility.Hidden;
@@ -94,18 +87,13 @@ namespace Pack.Element
                 Duration_Immediate = 10,
                 Duration_Round = 1
             };
-            Custom_Card_Adventure.AdventureCard.Effect_States.Add(state);
-            Adventure adventure = new Adventure();
-            Custom_Card_Adventure.DataContext = adventure;
-            Custom_Card_Adventure.DataContext = Custom_Card_Adventure.AdventureCard;
-            Origin_Custom_Card.DataContext = adventure;
-            Origin_Custom_Card.DataContext = Custom_Card_Adventure.AdventureCard;
+            Custom_Card_Adventure.Adventure.Effect_States.Add(state);
             States_Select.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            XY.Send_To_Server("奇遇上传#" + JsonConvert.SerializeObject(Origin_Custom_Card.AdventureCard));
+            XY.Send_To_Server("奇遇上传#" + JsonConvert.SerializeObject(Origin_Custom_Card.Adventure));
         }
     }
 }

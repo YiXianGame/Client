@@ -63,6 +63,7 @@ namespace Pack.Element
             while (!(ptr is Custom_Card_SkillCard))ptr= VisualTreeHelper.GetParent(ptr);
             EditCard.Open_Edit((Custom_Card_SkillCard)ptr);
         }
+
         private void Fitler()
         {
             Filter_Skill.Name = Template_Skill_Name.Text;
@@ -119,14 +120,14 @@ namespace Pack.Element
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SkillCard[] skillCards = new SkillCard[5] { new SkillCard(),new SkillCard(),new SkillCard(),new SkillCard(),new SkillCard()};
+            SkillCard[] skillCards = new SkillCard[5] { new SkillCard(), new SkillCard(), new SkillCard(), new SkillCard(), new SkillCard() };
             int cnt = 0;
-            string temp;
             SkillCardsModel skillCardsModel = new SkillCardsModel();
             foreach (SkillCard item in skillCards)
             {
+                ++cnt;
                 item.Level = cnt;
-                item.Name = "新技能" + (++cnt).ToString();
+                item.Name = "新技能" + cnt.ToString();
                 item.Father_ID = skillCardsModel.ID;
             }
             skillCardsModel.SkillCards = skillCards;

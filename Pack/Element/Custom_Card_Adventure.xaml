@@ -162,15 +162,16 @@
                 <Grid Grid.Column="1"  Grid.Row="0" Grid.RowSpan="3">
                     <Border BorderBrush="{DynamicResource MaterialDesignDivider}">
                         <WrapPanel  VerticalAlignment="Top" Width="82" HorizontalAlignment="Right" Margin="-4,4,0,0" Height="246">
-                            <TextBlock x:Name="Hp"  Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="Red" Text="{Binding Hp}" Width="30"  Margin="10,40,0,0"/>
-                            <TextBlock FontFamily="楷体" FontWeight="Bold" Margin="-5,40,-5,7"><Run Text="伤害值"/></TextBlock>
+                            <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="Red" Text="{Binding Hp}" Width="30"  Margin="10,0,0,0"/>
+                            <TextBlock FontFamily="楷体" FontWeight="Bold" Margin="-5,0,-5,7"><Run Text="伤害值"/></TextBlock>
 
-                            <TextBlock x:Name="Mp" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"  FontFamily="楷体" FontWeight="Bold"  Foreground="Blue" Text="{Binding Mp}" Width="30" Margin="10,40,0,0"/>
+                            <TextBlock  Style="{StaticResource MaterialDesignSubtitle2TextBlock}"  FontFamily="楷体" FontWeight="Bold"  Foreground="Blue" Text="{Binding Mp}" Width="30" Margin="10,40,0,0"/>
                             <TextBlock FontFamily="楷体" FontWeight="Bold"  HorizontalAlignment="Left" Margin="-5,40,-5,7"><Run Text="仙气值"/></TextBlock>
-
-                            <TextBlock x:Name="Probability" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="DarkTurquoise" Text="{Binding Probability}" Width="30" Margin="10,40,0,0"/>
+                            <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="DarkTurquoise" Text="{Binding Probability}" Width="30" Margin="10,40,0,0"/>
                             <TextBlock FontFamily="楷体" FontWeight="Bold" HorizontalAlignment="Left" Margin="-5,40,-5,7"><Run Text="随机率"/></TextBlock>
-                            <Label x:Name="Cloud" FontFamily="楷体" Foreground="SkyBlue" FontWeight="Bold"  Content="非云端" Width="65" FontSize="18" Margin="10,30,0,5"/>
+                            <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}" FontFamily="楷体" FontWeight="Bold"  Foreground="DarkBlue" Text="{Binding Attack_Number}" Width="30" Margin="10,40,0,0"/>
+                            <TextBlock FontFamily="楷体" FontWeight="Bold" HorizontalAlignment="Left" Margin="-5,40,-5,7"><Run Text="作用数"/></TextBlock>
+                            <Label x:Name="Cloud" FontFamily="楷体" Foreground="SkyBlue" FontWeight="Bold"  Content="非云端" Width="65" FontSize="18" Margin="10,10,0,5"/>
                         </WrapPanel>
                     </Border>
                 </Grid>

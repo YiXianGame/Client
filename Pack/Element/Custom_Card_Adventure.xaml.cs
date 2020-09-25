@@ -24,12 +24,12 @@ namespace Pack.Element
     /// </summary>
     public partial class Custom_Card_Adventure
     {
-        public Adventure AdventureCard;
+        public Adventure Adventure;
         public Custom_Card_Adventure(Adventure adventure)
         {
             InitializeComponent();
             DataContext = adventure;
-            AdventureCard = adventure;
+            Adventure = adventure;
             InitializeComponent();
             Cloud.Content = adventure.Cloud;
         }

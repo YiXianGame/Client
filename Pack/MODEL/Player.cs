@@ -12,6 +12,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Make.MODEL
 {
@@ -32,9 +33,11 @@ namespace Make.MODEL
         private int team;//所属队伍
         private Pos pos;//地标
         private Map map;//地图
+        private List<Player> directsed = new List<Player>();
         private int exp;//经验
-        private List<State> states=new List<State>();//战斗状态
+        private List<State> states = new List<State>();//战斗状态
         private bool is_Death;//是否死亡
+        private List<Player> friends = new List<Player>();//队友
         private Enums.Player_Active active = Enums.Player_Active.Leisure ;//玩家当前游戏状态
         private int kills;//击杀数
         private int deaths;//死亡数
@@ -46,9 +49,12 @@ namespace Make.MODEL
         private List<SkillCard> hand_SkillCards = new List<SkillCard>();//手中的技能卡
         private SkillCard action_Skill;//释放的技能
         private long from_Group=-1;//QQ群号
+        private DateTime leisure;
         private Socket socket;
+        private bool is_Robot=false;
         public long ID { get => iD; set => iD = value; }
         public string Name { get => name; set => name = value; }
+        public List<Player> Directsed { get => directsed; set => directsed = value; }
         public int Hp 
         { 
 
@@ -57,7 +63,7 @@ namespace Make.MODEL
             { 
                 hp = value; 
                 if (hp <= 0)
-                {
+                {                    
                     Is_Death = true;
                     Deaths++;
                 }
@@ -145,5 +151,9 @@ namespace Make.MODEL
         public Pos Pos { get => pos; set => pos = value; }
         public Map Map { get => map; set => map = value; }
         public List<Player> Directs { get => directs; set => directs = value; }
+        public bool Is_Robot { get => is_Robot; set => is_Robot = value; }
+        public DateTime Leisure { get => leisure; set => leisure = value; }
+        public List<Player> Friends { get => friends; set => friends = value; }
+
     }
 }

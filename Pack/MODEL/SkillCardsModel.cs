@@ -55,22 +55,27 @@ namespace Make.MODEL
         }
         public void Delete()
         {
-            string filepath = GeneralControl.directory + "\\技能卡\\" + ID + ".json";
-            GeneralControl.Skill_Cards.Remove(this);
+            string filepath = GeneralControl.directory +  "\\技能卡\\" + ID + ".json";
             foreach (SkillCard item in skillCards)
             {
-                GeneralControl.Skill_Card_Dictionary.Remove(item.Name);
+                GeneralControl.Skill_Card_Name_Skllcard.Remove(item.Name);
+                GeneralControl.Skill_Card_ID_Skllcard.Remove(item.ID);
             }
+            GeneralControl.Skill_Cards.Remove(this);
+            GeneralControl.Skill_Cards_ID.Remove(ID);
             File.Delete(filepath);
         }
         public void Add_To_General()
         {
             foreach (SkillCard skill in skillCards)
             {
-                while ((from SkillCard item in GeneralControl.Skill_Card_Dictionary.Values where item.Name == skill.Name select item).Any()) skill.Name = skill.Name + "-副本";
-                GeneralControl.Skill_Card_Dictionary.Add(skill.Name, skill);
+                while ((from string item in GeneralControl.Skill_Card_Name_Skllcard.Keys where item == skill.Name select item).Any()) skill.Name += "-副本";
+                while ((from string item in GeneralControl.Skill_Card_ID_Skllcard.Keys where item == skill.ID select item).Any()) skill.ID = Guid.NewGuid().ToString();
+                GeneralControl.Skill_Card_Name_Skllcard.Add(skill.Name, skill);
+                GeneralControl.Skill_Card_ID_Skllcard.Add(skill.ID, skill);
             }
             GeneralControl.Skill_Cards.Add(this);
+            GeneralControl.Skill_Cards_ID.Add(ID, this);
         }
     }
 }

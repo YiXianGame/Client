@@ -49,7 +49,7 @@ namespace Pack.Element
         {
             DependencyObject ptr = sender as DependencyObject;
             while (!(ptr is Custom_Card_Adventure)) ptr = VisualTreeHelper.GetParent(ptr);
-            XY.Send_To_Server("作者查询#" + (ptr as Custom_Card_Adventure).AdventureCard.Author_ID);
+            XY.Send_To_Server("作者查询#" + (ptr as Custom_Card_Adventure).Adventure.Author_ID);
             Author.Visibility = Visibility.Visible;
         }
 
@@ -65,7 +65,7 @@ namespace Pack.Element
             IEnumerable<Adventure> array = Make.MODEL.Filter.Adventure(Make.MODEL.GeneralControl.Adventures,Filter_Adventure);
             foreach (Custom_Card_Adventure item in AdventurePanel.Children)
             {  
-                if (array!=null && array.Where<Adventure>(x => item.AdventureCard.Equals (x)).Count() != 0)
+                if (array!=null && array.Where<Adventure>(x => item.Adventure.Equals (x)).Count() != 0)
                 {
                     item.Visibility = Visibility.Visible;
                 }
@@ -134,10 +134,10 @@ namespace Pack.Element
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            (from Custom_Card_Adventure item in AdventurePanel.Children where item.AdventureCard.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_Adventure item)
+            (from Custom_Card_Adventure item in AdventurePanel.Children where item.Adventure.Cloud == "云端" select item).ToList().ForEach(delegate (Custom_Card_Adventure item)
             {
-                item.AdventureCard.Delete();
-                GeneralControl.Adventures.Remove(item.AdventureCard);
+                item.Adventure.Delete();
+                GeneralControl.Adventures.Remove(item.Adventure);
                 GeneralControl.Skill_Card_Date = DateTime.Now;
                 AdventurePanel.Children.Remove(item);
             });

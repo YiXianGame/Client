@@ -62,36 +62,22 @@ namespace Pack.Element
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Hidden;
             DateTime dateTime = DateTime.Now;
-            DependencyObject ptr = sender as DependencyObject;
-            while (!(ptr is MainWindow)) ptr = VisualTreeHelper.GetParent(ptr);
-            MainWindow  mainWindow  = ptr as MainWindow;
+            this.Visibility = Visibility.Hidden;
             Origin_Custom_Card.SkillCardsModel.Delete();
-            Debug.WriteLine(GeneralControl.Skill_Cards.Count);
             GeneralControl.Skill_Cards.Remove(Origin_Custom_Card.SkillCardsModel);
-            foreach(SkillCard item in Origin_Custom_Card.SkillCardsModel.SkillCards)
+            GeneralControl.Skill_Cards_ID.Remove(Origin_Custom_Card.SkillCardsModel.ID);
+            foreach (SkillCard item in Origin_Custom_Card.SkillCardsModel.SkillCards)
             {
-                GeneralControl.Skill_Card_Dictionary.Remove(item.Name);
+                GeneralControl.Skill_Card_ID_Skllcard.Remove(item.ID);
+                GeneralControl.Skill_Card_Name_Skllcard.Remove(item.Name);
             }
             GeneralControl.Skill_Card_Date = dateTime;
-            mainWindow.CardPanle.CardsPanel.Children.Remove(Origin_Custom_Card);
+            GeneralControl.MainMenu.CardPanle.CardsPanel.Children.Remove(Origin_Custom_Card);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Effect_States.Remove((State)(((Button)sender).DataContext));
-            SkillCard skillCard = new SkillCard
-            {
-                Is_Cure = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Cure,
-                Is_Eternal = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Eternal,
-                Is_Physics = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Physics,
-                Is_Magic = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Magic,
-                Is_Attack = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Attack
-            };
-            Custom_Card.DataContext = skillCard;
-            Custom_Card.DataContext = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1];
-            Origin_Custom_Card.DataContext = skillCard;
-            Origin_Custom_Card.DataContext = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1];
+            Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Effect_States.Remove((State)(sender as Button).DataContext);
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -114,19 +100,6 @@ namespace Pack.Element
                 Duration_Round = 1
             };
             Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Effect_States.Add(state);
-            SkillCard skillCard = new SkillCard
-            {
-                Is_Cure = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Cure,
-                Is_Eternal = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Eternal,
-                Is_Physics = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Physics,
-                Is_Magic = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Magic,
-                Is_Attack = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1].Is_Attack
-            };
-            Custom_Card.DataContext = skillCard;
-            Custom_Card.DataContext = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1];
-            Origin_Custom_Card.DataContext = skillCard;
-            Origin_Custom_Card.DataContext = Custom_Card.SkillCardsModel.SkillCards[Custom_Card.Rate.Value - 1];
-            Origin_Custom_Card.Rate.Value = Custom_Card.Rate.Value;
             States_Select.Visibility = Visibility.Hidden;
         }
 
