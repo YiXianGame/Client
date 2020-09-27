@@ -118,14 +118,17 @@
                     materialDesign:HintAssist.Hint="仙气值" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="27,1" Foreground="blue" FontFamily="楷体" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="20" Text="{Binding Mp, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox x:Name="Attack_Number"
-                    materialDesign:HintAssist.Hint="作用数" 
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="27,1" Foreground="DarkBlue" FontFamily="楷体" HorizontalContentAlignment="Center" Grid.Column="1" FontSize="20"  Text="{Binding Attack_Number, UpdateSourceTrigger=PropertyChanged}"/>
+                    materialDesign:HintAssist.Hint="魂命数" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="27,1,27,1" Foreground="DarkBlue" FontFamily="楷体" HorizontalContentAlignment="Center" FontSize="20"  Text="{Binding Attack_Number, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox x:Name="Probability_Copy"
                         materialDesign:HintAssist.Hint="随机率" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="27,0,27,1" Foreground="DarkTurquoise" FontFamily="楷体" HorizontalContentAlignment="Center" Grid.Column="1" FontSize="20"  Text="{Binding Probability, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
                     <TextBox x:Name="Hp"
                     materialDesign:HintAssist.Hint="伤害值"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="27,1" Foreground="Salmon" FontFamily="楷体" HorizontalContentAlignment="Center" Grid.Column="2" Grid.Row="1" FontSize="20"  Text="{Binding Hp, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="Attack_Number_Copy"
+                        materialDesign:HintAssist.Hint="灵命数" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Margin="27,1,27,1" Foreground="DarkBlue" FontFamily="楷体" HorizontalContentAlignment="Center" FontSize="20"  Text="{Binding Attack_Number, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2"/>
 
                 </Grid>
                 <Button
