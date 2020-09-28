@@ -90,8 +90,8 @@ namespace Pack.BLL
                         try { Connect_Server(); }
                         catch (Exception)
                         {
-                            Console.WriteLine("连接失败，5秒后重新尝试");
-                            Thread.Sleep(5000);
+                            Console.WriteLine("连接失败，10秒后重新尝试");
+                            Thread.Sleep(10000);
                             continue;
                         }
                         if (client_socket.Connected)
@@ -109,7 +109,11 @@ namespace Pack.BLL
         /// </summary>
         public void Request_Client(string send_msg)
         {
-            client_socket.Send(messageHandle.Convert_SendMsg(send_msg));
+            if (client_socket.Connected)
+            {
+                client_socket.Send(messageHandle.Convert_SendMsg(send_msg));
+            }
+            else Console.WriteLine("服务端未连接,消息发送失败:"+send_msg);
         }
         public class MessageHandle
         {
