@@ -4,8 +4,6 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"                 
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                  xmlns:Element="clr-namespace:Pack.Element"
-                 xmlns:local="clr-namespace:Pack"
-                 xmlns:Model="clr-namespace:Make.MODEL;assembly=Make"
                  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
                  WindowStartupLocation="CenterScreen"
                  mc:Ignorable="d"
@@ -66,17 +64,20 @@
                                 </Border.Effect>
                             </Border>
                             <Label  Margin="181,42,531,765" HorizontalContentAlignment="Center"  Content="{Binding Path=Name}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="楷体" FontSize="100" FontWeight="Bold"  />
-                            <TextBox Width="1200" Height="350" Style="{StaticResource  MaterialDesignOutlinedTextFieldTextBox}"  Text="{Binding Path=Informations}" FontSize="50" VerticalAlignment="Stretch" Margin="95,530,103,60" HorizontalAlignment="Stretch" FontFamily="楷体"  TextWrapping="Wrap" FontWeight="Bold" materialDesign:HintAssist.Hint="个性签名"/>
-                            <Label Content="已创作的卡牌数量:"  Margin="106,312,830,564" FontSize="50" />
-                            <Label Content="{Binding Path=Create_num}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center"  Margin="538,407,616,484" FontSize="50" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
-                            <Label Content="张"  FontSize="50" Margin="763,311,538,563" RenderTransformOrigin="-0.392,0.694"/>
-                            <Label Content="已更新的卡牌数量:"   FontSize="50" Margin="106,402,841,480"/>
-                            <Label Content="{Binding Path=Upgrade_num}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="536,316,614,572" FontSize="50" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
-                            <Label Content="张"  FontSize="50" Margin="763,406,543,472"/>
-                            <Label Content="QQ号:"  FontSize="50" Margin="106,233,1106,652"/>
-                            <TextBox Style="{StaticResource   MaterialDesignDataGridComboBoxEditableTextBox}" Text="{Binding Path=QQ}" HorizontalContentAlignment="Stretch" Margin="260,239,229,652" VerticalContentAlignment="Stretch" FontSize="50"/>
+                            <TextBox Width="1200" Height="350" Style="{StaticResource  MaterialDesignOutlinedTextFieldTextBox}"  Text="{Binding Path=Informations}" FontSize="50" VerticalAlignment="Stretch" Margin="106,574.63,92,28.369" HorizontalAlignment="Stretch" FontFamily="楷体"  TextWrapping="Wrap" FontWeight="Bold" materialDesign:HintAssist.Hint="个性签名"/>
+                            <Label Content="已创作的卡牌数量:"  Margin="113,385.538,823,490.462" FontSize="50" />
+                            <Label Content="{Binding Path=Create_num}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center"  Margin="545,480.538,609,410.462" FontSize="50" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
+                            <Label Content="张"  FontSize="50" Margin="770,384.538,531,489.462" RenderTransformOrigin="-0.392,0.694"/>
+                            <Label Content="已更新的卡牌数量:"   FontSize="50" Margin="113,475.538,834,406.462"/>
+                            <Label Content="{Binding Path=Upgrade_num}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="543,389.538,607,498.462" FontSize="50" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
+                            <Label Content="张"  FontSize="50" Margin="770,479.538,536,398.462"/>
+                            <Label Content="QQ号:"  FontSize="50" Margin="113,223,1099,662"/>
+                            <TextBox Style="{StaticResource   MaterialDesignDataGridComboBoxEditableTextBox}" Text="{Binding Path=QQ}" HorizontalContentAlignment="Stretch" Margin="260,229,229,662" VerticalContentAlignment="Stretch" FontSize="50"/>
                             <Button Content="存" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Background="LightSeaGreen" HorizontalAlignment="Left" Height="101" Margin="1170,55,0,0" VerticalAlignment="Top" Width="106" FontSize="40" Click="Button_Click"/>
                             <Button Content="刷" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Background="#FF36CDF9" HorizontalAlignment="Left" Height="101" Margin="1031,55,0,0" VerticalAlignment="Top" Width="106" FontSize="36" Click="Button_Click_1"/>
+                            <Label Content="仙域币:"  Margin="115,302,1111.298,574" FontSize="50" />
+                            <Label Content="枚"  FontSize="50" Margin="543.702,302,789.982,572" RenderTransformOrigin="-0.392,0.694"/>
+                            <Label Content="{Binding Money}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="291.702,302,858.298,586" FontSize="50" RenderTransformOrigin="0.512,0.462" Foreground="Crimson"/>
                         </Grid>
                     </Viewbox>
                 </TabItem>

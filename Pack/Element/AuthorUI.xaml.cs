@@ -21,9 +21,9 @@ namespace Pack.Element
     /// <summary>
     /// UserControl1.xaml 的交互逻辑
     /// </summary>
-    public partial class Author
+    public partial class AuthorUI
     {
-        public Author()
+        public AuthorUI()
         {
             InitializeComponent();
         }
