@@ -14,6 +14,7 @@ namespace Make.MODEL
         private int upgrade_num=0;
         private int create_num=0;
         private string informations="个性签名";
+        private int money = 0;
 
         public long ID { get => iD; set => iD = value; }
         public string Name { get => name; set => name = value; }
@@ -21,5 +22,6 @@ namespace Make.MODEL
         public int Create_num { get => create_num; set => create_num = value; }
         public string Informations { get => informations; set => informations = value; }
         public long QQ { get => qQ; set => qQ = value; }
+        public int Money { get => money; set => money = value; }
     }
 }

@@ -109,11 +109,14 @@ namespace Pack.BLL
         /// </summary>
         public void Request_Client(string send_msg)
         {
-            if (client_socket.Connected)
+            try 
             {
                 client_socket.Send(messageHandle.Convert_SendMsg(send_msg));
             }
-            else Console.WriteLine("服务端未连接,消息发送失败:"+send_msg);
+            catch(Exception e)
+            {
+                Console.WriteLine("消息发送失败" + e.Message);
+            }
         }
         public class MessageHandle
         {

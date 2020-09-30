@@ -25,6 +25,7 @@ namespace Pack.BLL
             //连接服务器
             s.Connect_Server();
             GeneralControl.socket = s;
+            XY.Send_To_Server("连接成功||" + GeneralControl.CQApi.GetLoginQQ());
             Skill_Cards_Load();
             Adventures_Load();
         }

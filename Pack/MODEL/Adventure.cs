@@ -16,8 +16,10 @@ namespace Make.MODEL
     public class Adventure
     {
         private string name = "";//奇遇名
-        private int mp;//对这个玩家造成的MP
-        private int hp;//对这个玩家造成的HP
+        private int attack;//攻击力
+        private int cure;//治疗量
+        private int self_Mp;//自我能量
+        private int direct_Mp;//指向能量
         private int state=0;//奇遇状态（是否可用）
         private List<State> effect_States=new  List<State>();//奇遇所自带的状态效果
         private string messages="";//自带信息
@@ -28,7 +30,6 @@ namespace Make.MODEL
         public long Author_ID { get => author_ID; set => author_ID = value; }
         public string ID { get => iD; set => iD = value; }
         private string cloud = "非云端";
-        private int attack_Number = 1;
         public string Name
         { 
             get => name;
@@ -45,9 +46,6 @@ namespace Make.MODEL
                 else return;
             }
         }
-        public int Mp { get => mp; set => mp = value; }
-        public int Hp { get => hp; set => hp = value; }
-
         public string Messages { get => messages; set => messages = value; }
         public int Probability { get => probability; set => probability = value; }
         public List<State> Effect_States { get => effect_States; set => effect_States = value; }
@@ -61,7 +59,10 @@ namespace Make.MODEL
         }
         public string Description { get => description; set => description = value; }
         public string Cloud { get => cloud; set => cloud = value; }
-        public int Attack_Number { get => attack_Number; set => attack_Number = value; }
+        public int Attack { get => attack; set => attack = value; }
+        public int Cure { get => cure; set => cure = value; }
+        public int Self_Mp { get => self_Mp; set => self_Mp = value; }
+        public int Direct_Mp { get => direct_Mp; set => direct_Mp = value; }
 
         public void SetName(string adventure_Name)
         {

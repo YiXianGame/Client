@@ -116,8 +116,10 @@ namespace Pack.Element
         {
             Adventure adventure = new Adventure
             {
-                Hp = 10,
-                Mp = 20,
+                Attack = 10,
+                Direct_Mp = 10,
+                Cure = 10,
+                Self_Mp = 20,
                 Probability = 30
             };
             adventure.Author_ID = GeneralControl.Menu_Person_Informations_Class.Instance.Author.ID;
