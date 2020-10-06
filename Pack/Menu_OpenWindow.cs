@@ -19,26 +19,30 @@ namespace Pack
         {
             try
             {
-                if (GeneralControl.MainMenu == null)
+                if (GeneralControl.CQApi != null)
                 {
-                    thread = new Thread(new ThreadStart(() =>
+                    if (GeneralControl.MainMenu == null)
                     {
-
-                        while (true)
+                        thread = new Thread(new ThreadStart(() =>
                         {
-                            GeneralControl.MainMenu = new MainWindow();
-                            GeneralControl.MainMenu.ShowDialog();
-                            manualResetEvent.Reset();
-                            manualResetEvent.WaitOne();
-                        }
-                    }));
-                    thread.SetApartmentState(ApartmentState.STA);
-                    thread.Start();
+                            while (true)
+                            {
+                                GeneralControl.MainMenu = new MainWindow();
+                                GeneralControl.MainMenu.ShowDialog();
+                                manualResetEvent.Reset();
+                                manualResetEvent.WaitOne();
+                            }
+                        }));
+                        thread.SetApartmentState(ApartmentState.STA);
+                        thread.Start();
+                    }
+                    else
+                    {
+                        manualResetEvent.Set();
+                    }
                 }
-                else
-                {
-                    manualResetEvent.Set();
-                }
+                else Console.WriteLine("未登陆QQ，请登陆后尝试");
+
             }
             catch (Exception err)
             {

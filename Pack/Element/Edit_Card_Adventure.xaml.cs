@@ -29,6 +29,7 @@ namespace Pack.Element
             Origin_Custom_Card = adventureCard;
             Custom_Card_Adventure.Adventure = adventureCard.Adventure;
             Custom_Card_Adventure.DataContext = adventureCard.Adventure;
+            Custom_Card_Adventure.Cloud.Content = adventureCard.Adventure.Cloud;
             Visibility = Visibility.Visible;
         }
 

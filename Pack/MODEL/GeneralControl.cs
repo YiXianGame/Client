@@ -30,7 +30,6 @@ namespace Make.MODEL
         public static CQApi CQApi;
         public static CQLog CQLog;
         public static Pack.MainWindow MainMenu;
-        public static bool Debug = false;
         /// <summary>
         /// 技能卡MODEL
         /// </summary>

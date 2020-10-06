@@ -29,6 +29,7 @@ namespace Pack.Element
             Origin_Custom_Card = custom_Card;
             Custom_Card.SkillCardsModel = custom_Card.SkillCardsModel;
             Custom_Card.DataContext = custom_Card.SkillCardsModel.SkillCards[0];
+            Custom_Card.Cloud.Content = custom_Card.SkillCardsModel.Cloud;
             Custom_Card.Rate.Value = 1;
             Visibility = Visibility.Visible;
         }

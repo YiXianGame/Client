@@ -67,11 +67,7 @@ namespace Pack.BLL
                 int count = clientSocket.EndReceive(ar);    //接收到的数据量
                 if (count == 0) ///说明客户端已经已经断开连接了
                 {
-                    if (clientSocket != null)
-                    {
-                        clientSocket.Close();
-                    }
-                    return;
+                    throw new Exception();
                 }
                 //j解析数据（把新接收的数据传入）
                 messageHandle.ReadMessage(count);
