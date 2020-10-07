@@ -23,7 +23,7 @@ namespace Pack.BLL
         /// <summary>
         /// 套接字
         /// </summary>
-        private Socket client_socket;
+        public Socket client_socket;
         /// <summary>
         /// 客户端要连接的ip地址
         /// </summary>
@@ -45,13 +45,41 @@ namespace Pack.BLL
         /// </summary>
         public void Connect_Server()
         {
-            if (client_socket!=null && client_socket.Connected)
+            if (client_socket != null && client_socket.Connected)
             {
                 client_socket.Close();
             }
             client_socket = Create_Client_Socket();
-            //tcp连接服务器的时候只需要连接一次，因为tcp是长链接
-            client_socket.Connect(new IPEndPoint(iPAddress, port));
+            try
+            {
+                //tcp连接服务器的时候只需要连接一次，因为tcp是长链接
+                client_socket.Connect(new IPEndPoint(iPAddress, port));
+            }
+            catch (Exception e)
+            {
+                if (!client_socket.Connected)
+                {
+                    Console.WriteLine("正在尝试重连");
+                    int cnt = 0;
+                    while (true)
+                    {
+                        Console.WriteLine("第" + ++cnt + "次尝试");
+                        try { client_socket.Connect(new IPEndPoint(iPAddress, port)); }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("连接失败，10秒后重新尝试");
+                            Thread.Sleep(10000);
+                            continue;
+                        }
+                        if (client_socket.Connected)
+                        {
+                            Console.WriteLine("连接成功！");
+                            break;
+                        }
+                    }
+                }
+                else Console.WriteLine(e.Message);
+            }
             client_socket.BeginReceive(messageHandle.DataBuffer, messageHandle.ContentSize, messageHandle.remainSize, SocketFlags.None, ReceiveCallBack,client_socket);
         }
             

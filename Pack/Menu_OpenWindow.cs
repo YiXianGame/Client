@@ -21,28 +21,31 @@ namespace Pack
             {
                 if (GeneralControl.CQApi != null)
                 {
-                    if (GeneralControl.MainMenu == null)
+                    if (GeneralControl.socket != null && GeneralControl.socket.client_socket.Connected)
                     {
-                        thread = new Thread(new ThreadStart(() =>
+                        if (GeneralControl.MainMenu == null)
                         {
-                            while (true)
+                            thread = new Thread(new ThreadStart(() =>
                             {
-                                GeneralControl.MainMenu = new MainWindow();
-                                GeneralControl.MainMenu.ShowDialog();
-                                manualResetEvent.Reset();
-                                manualResetEvent.WaitOne();
-                            }
-                        }));
-                        thread.SetApartmentState(ApartmentState.STA);
-                        thread.Start();
+                                while (true)
+                                {
+                                    GeneralControl.MainMenu = new MainWindow();
+                                    GeneralControl.MainMenu.ShowDialog();
+                                    manualResetEvent.Reset();
+                                    manualResetEvent.WaitOne();
+                                }
+                            }));
+                            thread.SetApartmentState(ApartmentState.STA);
+                            thread.Start();
+                        }
+                        else
+                        {
+                            manualResetEvent.Set();
+                        }
                     }
-                    else
-                    {
-                        manualResetEvent.Set();
-                    }
+                    Console.WriteLine("还未连接服务端，请稍后再试");
                 }
                 else Console.WriteLine("未登陆QQ，请登陆后尝试");
-
             }
             catch (Exception err)
             {
